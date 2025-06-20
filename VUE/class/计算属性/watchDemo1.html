@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3.4.0"></script>
+
+  <title>计算属性</title>
+</head>
+
+<body>
+  <div id="app">
+    <div id="app">
+    </div>
+    <template id="root">
+
+    </template>
+
+    <script>
+      const app = Vue.createApp({
+        template: '#root',
+        data() {
+          return {
+            hour: 0,
+            minute: 0
+          }
+        },
+        watch: {
+          // 第一种写法
+          // hour(nvalue,ovalue){
+          //   console.log(nvalue,ovalue);
+          //   this.minute=nvalue*60
+          // }
+          // 第一种写法
+          hour: {
+            handle() {
+              console.log(nvalue, ovalue);
+              this.minute = nvalue * 60
+            }
+
+          }
+        }
+
+        // watch: {
+        //   // 监听对象的所有属性变化（深度监听）
+        //   user: {
+        //     handler(newVal, oldVal) {
+        //       console.log('user 对象变化');
+        //     },
+        //     deep: true // 关键：开启深度监听
+        //   },
+        //   // 或直接监听对象的某个属性（无需深度）
+        //   'user.name'(newName, oldName) {
+        //     console.log(`用户名变化：${oldName} → ${newName}`);
+        //   }
+        // }
+      })
+      app.mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>props</title>
+</head>
+
+<body>
+  <div id="app"> </div>
+  <template id="root">
+    <div>
+      <h3>父组件</h3>
+      <input v-model="msg" placeholder="父传子内容">
+      <child :info="msg" @child-event="fromChild"></child>
+      <p>收到子组件消息：{{ childMsg }}</p>
+    </div>
+  </template>
+  <template id="child">
+    <div style="border:1px solid #aaa;padding:10px;margin-top:10px;">
+      <h4>子组件</h4>
+      <div>父传内容：{{ info }}</div>
+      <button @click="sendToParent">点我子传父</button>
+    </div>
+  </template>
+
+  <script>
+    const { ref, defineComponent } = Vue;
+
+    // 子组件
+    const child = defineComponent({
+      template: "#child",
+      props: {
+        info: String
+      },
+      setup(props, { emit }) {
+        function sendToParent() {
+          emit('child-event', '子组件发来的消息！');
+        }
+        return { ...props, sendToParent };
+      }
+    });
+
+    // 父组件
+    const app = Vue.createApp({
+      template: "#root",
+      components: { child },
+      setup() {
+        const msg = ref('你好，子组件');
+        const childMsg = ref('');
+        function fromChild(val) {
+          childMsg.value = val;
+        }
+        return { msg, childMsg, fromChild };
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+
+</html>

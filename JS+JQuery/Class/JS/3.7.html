@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 创建对象
+    // 1.字面量(常用)
+    const Person1 = {
+      name: 'xy',
+      age: 23,
+      run: () => console.log('跑')
+    }
+    // 2.利用类创建(常用)
+    // 定义一个 Person 类
+    class Person2 {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      // 定义一个实例方法 run
+      run() {
+        console.log('跑')
+      }
+    }
+
+    // 3.使用原型创建
+    function Person3() {
+    }
+    Person3.prototype.name = 'xy';
+    Person3.prototype.age = 23;
+    // 在原型上添加方法
+    Person3.prototype.sayHi = function () {
+      console.log(`你好，我叫 ${this.name}，今年 ${this.age} 岁。`)
+    }
+    // 创建 Person3 构造函数的实例
+    const personInstance = new Person3();
+
+    // 通过实例调用原型上的方法
+    // personInstance.sayHi();
+
+
+    // 对象的属性
+    // 修改对象属性---Object.defineProperty()
+    const obj = {}
+    Object.defineProperty(obj, 'name', {
+      value: 'xy',
+      writable: false,//不可修改
+      enumerable: false,//不可枚举
+      configurable: true//是否可以配置
+    })
+    // console.log(obj.name);//xy
+    // obj.name = 'lsm';
+    // console.log(Object.keys(obj));//[]
+
+    // const fun1 = function (a, b) {
+    //   console.log();
+    //   console.log();
+    // }
+    // fun1()
+    // // apply---传数组，call---直接传参
+    // fun1.call(3,1, 2);
+    // fun1.aplly(3, [1, 2]);
+
+    // function multiply(a, b) {
+    //   return a * b;
+    // }
+
+    // // multiply.bind(null, 2) 创建了一个新函数 double，它预设了第一个参数为 2。调用 double(5) 时，相当于调用 multiply(2, 5)，最终返回结果 10。
+    // const double = multiply.bind(null, 2);
+    // console.log(double(5)); 
+
+
+    // 创建一个对象
+    class MyObject {
+      constructor() {
+        // 创建属性 a，值为 number 类型
+        this.a = 5;
+        // 创建属性 b，值为 array 类型
+        this.b = [1, 2, 3, 4, 5];
+      }
+      // 创建方法判断 a 是否出现在 b 中
+      findIndex() {
+        return this.b.indexOf(this.a);
+      }
+    }
+    // 创建 MyObject 类的实例
+    const obj1 = new MyObject();
+    // 调用 findIndex 方法并输出结果
+    console.log(obj1.findIndex());
+  </script>
+</body>
+
+</html>

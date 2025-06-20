@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery 游戏角色操控</title>
+  <style>
+    /* 229970615 李松蔓 */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      position: relative;
+    }
+
+    #player {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+    }
+
+    #treasure {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      background-size: 100% 100%;
+    }
+  </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.0/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+</head>
+
+<body>
+  <div id="map">
+    <img id="player" src="./imgs/player_right.gif" alt="游戏角色">
+    <img id="treasure" src="./imgs/treasure.gif" alt="宝藏">
+  </div>
+
+  <script>
+    // 角色初始位置
+    let player = $("#player");
+    let treasure = $("#treasure");
+    // 初始坐标
+    let x = 50, y = 50;
+    // 移动速度（像素/次）
+    let speed = 10;
+    // 是否处于变身状态
+    let isBig = false;
+
+    // 初始化角色位置
+    player.css({ left: x, top: y });
+    treasure.css({
+      left: 1000,
+      top: 600,
+      width: '150px',
+      height: '150px'
+    });
+
+    // 键盘控制：方向键移动
+    $(document).keydown(function (e) {
+      // 动态生成图片前缀
+      let currentSrc = isBig ? 'playerbig_' : 'player_';
+      switch (e.keyCode) {
+        case 37: // 左箭头
+          move('left');
+          player.attr('src', `./imgs/${currentSrc}left.gif`); // 左移动图片
+          break;
+        case 38: // 上箭头
+          move('up');
+          player.attr('src', `./imgs/${currentSrc}right.gif`);
+          break;
+        case 39: // 右箭头
+          move('right');
+          player.attr('src', `./imgs/${currentSrc}right.gif`); // 右移动图片
+          break;
+        case 40: // 下箭头
+          move('down');
+          player.attr('src', `./imgs/${currentSrc}right.gif`);
+          break;
+      }
+    });
+
+    // 鼠标点击控制：点击地图任意位置移动到该点
+    $("#map").click(function (e) {
+      let targetX = e.pageX - $(this).offset().left;
+      let targetY = e.pageY - $(this).offset().top;
+
+      // 判断鼠标移动方向，更新角色图片
+      let currentSrc = isBig ? 'playerbig_' : 'player_';
+      if (targetX > x) { // 向右移动
+        player.attr('src', `./imgs/${currentSrc}right.gif`);
+      } else if (targetX < x) { // 向左移动
+        player.attr('src', `./imgs/${currentSrc}left.gif`);
+      } else { // 上下移动（可扩展上下图片）
+        player.attr('src', `./imgs/${currentSrc}right.gif`); // 临时使用右图片，需补充上下素材
+      }
+      moveTo(targetX, targetY);
+    });
+
+    // 双击变身：切换大小角色
+    player.dblclick(function () {
+      isBig = !isBig;
+      if (isBig) {
+        player.attr('src', './imgs/player2.gif'); // 大角色图片
+        player.css({ width: '200px', height: '200px' }); // 调整大小
+      } else {
+        player.attr('src', './imgs/player.gif'); // 小角色图片
+        player.css({ width: '120px', height: '120px' });
+      }
+    });
+
+    // 移动函数（边界检测）
+    function move(direction) {
+      let mapWidth = $("#map").width();
+      let mapHeight = $("#map").height();
+      let playerWidth = player.width();
+      let playerHeight = player.height();
+
+      switch (direction) {
+        case 'left': x = Math.max(0, x - speed); break;
+        case 'up': y = Math.max(0, y - speed); break;
+        case 'right': x = Math.min(mapWidth - playerWidth, x + speed); break;
+        case 'down': y = Math.min(mapHeight - playerHeight, y + speed); break;
+      }
+      player.css({ left: x, top: y });
+    }
+
+    // 平滑移动到目标位置
+    function moveTo(targetX, targetY) {
+      player.animate({
+        left: targetX,
+        top: targetY
+      }, 500, function () { // 添加动画完成回调函数
+        x = targetX; // 动画结束后更新x坐标
+        y = targetY; // 动画结束后更新y坐标
+      }); 
+    }
+
+    function checkCollision() {
+      let playerRect = player[0].getBoundingClientRect();
+      let treasureRect = treasure[0].getBoundingClientRect();
+
+      // 检测矩形碰撞
+      if (playerRect.left < treasureRect.right &&
+        playerRect.right > treasureRect.left &&
+        playerRect.top < treasureRect.bottom &&
+        playerRect.bottom > treasureRect.top) {
+        findTreasure(); // 触发宝藏事件
+      }
+    }
+
+    // 找到宝藏逻辑（显示提示并隐藏宝藏）
+    function findTreasure() {
+      alert("找到宝藏！");
+      treasure.hide(); // 隐藏宝藏图片
+      player.attr('src', './imgs/player1.gif'); // 更换为捡取动作图片
+      player.css({ width: '200px', height: '200px' });
+      clearInterval(treasureInterval); // 停止检测
+    }
+
+    // 定时检测碰撞
+    let treasureInterval = setInterval(checkCollision, 16);
+  </script>
+</body>
+
+</html>

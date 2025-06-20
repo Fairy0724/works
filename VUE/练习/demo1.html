@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>内置指令</title>
+</head>
+
+<body>
+  <div id="app">
+    <template id="root">
+
+      <table>
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>名字</th>
+            <th>数学</th>
+            <th>语文</th>
+            <th>英语</th>
+            <th>总分</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(student,index) in students" :key="student.name">
+            <td>{{index+1}}</td>
+            <td>{{student.name}}</td>
+            <td>
+              <span v-if="student.math>60" style="color:green;">{{student.math}}</span>
+              <span v-else style="color:red;">{{student.math}}</span>
+            </td>
+            <td>
+              <span v-if="student.chinese>60" style="color:green;">{{student.chinese}}</span>
+              <span v-else style="color:red;">{{student.chinese}}</span>
+            </td>
+            <td>
+              <span v-if="student.english>60" style="color:green;">{{student.english}}</span>
+              <span v-else style="color:red;">{{student.english}}</span>
+            </td>
+            <td>{{student.math+student.chinese+student.english}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </template>
+
+
+  </div>
+  <script>
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          students: [
+            { name: 'Alice', math: 85, chinese: 78, english: 92 },
+            { name: 'Bob', math: 55, chinese: 60, english: 88 },
+            { name: 'Charlie', math: 90, chinese: 85, english: 55 },
+            { name: 'David', math: 75, chinese: 90, english: 80 },
+            { name: 'Eve', math: 60, chinese: 65, english: 70 }
+          ]
+        }
+      }
+    })
+    const root = app.mount('#app')
+  </script>
+</body>
+
+</html>

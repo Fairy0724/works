@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>子传父</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+      <h2>{{title}}</h2>
+      <child-component v-model:title="message"></child-component>
+    </div>
+  </template>
+  <template id="child">
+    <div>
+      <!-- 双向绑定 -->
+      <input type="text" 
+      :value="title" 
+      @input="change($event)">
+    </div>
+  </template>
+  <script>
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          title: '父组件',
+          message:'123'
+        }
+      }
+    })
+    app.component('childComponent', {
+      template: '#child',
+      props:['title'],
+      // emits:[],
+      methods:{
+        change(e){
+          this.$emit('update:title', e.target.value)
+        }
+      }
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

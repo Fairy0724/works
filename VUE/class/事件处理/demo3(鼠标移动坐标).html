@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>鼠标移动坐标</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+      坐标:{{x}}--{{y}}
+      <div style="width: 200px;height: 200px;
+      background-color: green;" @mousemove="move('abc',$event)"></div>
+    </div>
+
+  </template>
+  <script>
+
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          x: 0,
+          y: 0
+        }
+      },
+      methods: {
+        move(name, event) {
+          this.x = event.offsetX
+          this.y = event.offsetY
+        }
+      }
+
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

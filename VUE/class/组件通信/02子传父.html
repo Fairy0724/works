@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>子传父---emit</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+      <h2>{{title}}</h2>
+      <span>{{message}}</span>
+      <child-component @hello-event="handleEvent"></child-component>
+    </div>
+  </template>
+  <template id="child">
+    <div>
+      <h2>{{title}}</h2>
+      <button @click="send">发送</button>
+    </div>
+  </template>
+  <script>
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          title: '父组件',
+          message:''
+        }
+      },
+      methods:{
+        handleEvent(str) {
+          this.message=str
+        }
+      }
+    })
+    app.component('childComponent', {
+      template: '#child',
+      // 声明自定义事件
+      emits:['helloEvent'],
+      data() {
+        return{
+          title: '子组件'
+        }
+      },
+      methods:{
+        send(){
+          // 子传父$emit--通过 $emit 触发 helloEvent 事件，并传递数据
+          this.$emit('helloEvent','hello world')
+        }
+      }
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

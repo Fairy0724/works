@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <title>登录动画</title>
+  <style>
+    /* 229970615 李松蔓 */
+    body {
+      background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      background: #f7f7f7;
+      padding: 32px 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+      min-width: 300px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 24px;
+      color: #a6c1ee;
+    }
+
+    .textbox {
+      margin-bottom: 18px;
+    }
+
+    .textbox input {
+      width: 90%;
+      padding: 10px 14px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      font-size: 15px;
+      background: #eee;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .textbox input:focus {
+      border-color: #a6c1ee;
+      background: #eee;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 10px 0;
+      background: #a6c1ee;
+      color: #eee;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+
+    button[type="submit"]:hover {
+      background: #a6c1ee;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 229970615 李松蔓 -->
+  <div id="app"></div>
+  <template id="root">
+    <div class="container">
+      <div class="login-box animate__animated animate__fadeInDown">
+        <h2>登录</h2>
+        <form @submit.prevent="handleLogin">
+          <div class="textbox">
+            <input type="text" v-model="username" placeholder="用户名" required />
+          </div>
+          <div class="textbox">
+            <input type="password" v-model="password" placeholder="密码" required />
+          </div>
+          <button type="submit" >登录</button>
+        </form>
+      </div>
+    </div>
+  </template>
+  <script>
+    // 229970615 李松蔓
+    const { createApp, ref } = Vue
+    const app = createApp({
+      template: "#root",
+      setup() {
+        const username = ref("")
+        const password = ref("")
+        const handleLogin = () => {
+          if (username.value.trim() === "" || password.value.trim() === "") {
+            alert("用户名和密码不能为空")
+            return
+          }
+          // 模拟登录成功
+          alert(`欢迎，${username.value}!`)
+          username.value = ""
+          password.value = ""
+        }
+        return {
+          username, password, handleLogin
+        }
+      }
+
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>导航栏插槽示例</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- 根模板，切换场景 -->
+  <template id="root">
+    <mheader>
+      <template v-slot:back>
+        <span>&</span>
+      </template>
+      <template v-slot:content>
+        <div style="font-size:20px;">导航栏</div>
+      </template>
+      <template v-slot:back>
+      </template>
+    </mheader>
+    </div>
+  </template>
+
+  <!-- 头部导航栏组件模板 -->
+  <template id="mheader">
+    <div
+      style="display:flex;align-items:center;justify-content:space-between;border:1px solid #333;border-radius:8px;padding:8px 12px;width:320px;margin:20px auto;">
+      <span style="font-size:20px;cursor:pointer;">&#60;</span>
+      <!-- 活动区插槽 -->
+      <div style="flex:1;text-align:center;">
+        <slot name="center"></slot>
+      </div>
+      <span style="font-size:20px;cursor:pointer;">&#128269;</span>
+    </div>
+  </template>
+
+  <script>
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          scene: 1 // 1为文字，2为搜索框
+        }
+      }
+    });
+
+    // 全局注册头部导航栏组件
+    app.component("mheader", {
+      template: "#mheader"
+    });
+
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

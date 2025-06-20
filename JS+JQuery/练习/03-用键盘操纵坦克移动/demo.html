@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<!-- 229970615 李松蔓 -->
+
+<head>
+  <meta charset="utf-8" />
+  <title>让坦克开起来</title>
+  <style type="text/css">
+    input {
+      font-size: 26px;
+      margin-top: 20px;
+    }
+
+    body {
+      background-image: url(images/grassland.png);
+    }
+
+    #mytank {
+      position: absolute;
+      left: 10px;
+      top: 100px
+    }
+  </style>
+</head>
+
+<body>
+  <img id="mytank" src="images/right.png" />
+  <script>
+    // 获取坦克元素
+    const tank = document.querySelector('#mytank');
+    // 定义每次移动的步长
+    const step = 10;
+    // 获取窗口的宽度和高度
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // 禁用右键
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+
+    // 键盘移动
+    document.addEventListener('keydown', function (e) {
+      let currentLeft = parseInt(getComputedStyle(tank).left);
+      let currentTop = parseInt(getComputedStyle(tank).top);
+      let newLeft = currentLeft;
+      let newTop = currentTop;
+
+      // 根据用户按下的不同按键执行不同的操作
+      switch (e.key) {
+        // 上
+        case 'w':
+        case 'W':
+        case 'ArrowUp':
+          // 计算新的 top 位置，确保不会超出窗口顶部边界
+          newTop = Math.max(0, currentTop - step);
+          tank.src = 'images/up.png';
+          break;
+
+        // 左
+        case 'a':
+        case 'A':
+        case 'ArrowLeft':
+          newLeft = Math.max(0, currentLeft - step);
+          tank.src = 'images/left.png';
+          break;
+
+        // 下
+        case 's':
+        case 'S':
+        case 'ArrowDown':
+          newTop = Math.min(windowHeight - tank.offsetHeight, currentTop + step);
+          tank.src = 'images/down.png';
+          break;
+
+        // 右
+        case 'd':
+        case 'D':
+        case 'ArrowRight':
+          newLeft = Math.min(windowWidth - tank.offsetWidth, currentLeft + step);
+          tank.src = 'images/right.png';
+          break;
+      }
+      // 更新坦克的位置
+      tank.style.left = newLeft + 'px';
+      tank.style.top = newTop + 'px';
+    });
+  </script>
+</body>
+
+</html>

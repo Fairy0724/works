@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>列表编辑组件</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+      <h2>任务列表</h2>
+      <ul>
+        <!-- 唯一 key -->
+        <li v-for="(task, index) in tasks" :key="index">
+          <!-- 根据是否处于编辑状态显示文本或输入框 -->
+           <!-- 双向绑定 -->
+          <input v-if="isEditIndex === index" v-model="task.text" @blur="save(index)" @keyup.enter="save(index)">
+          <span v-else @dblclick="edit(index)">
+            {{ task.text }}
+          </span>
+        </li>
+      </ul>
+    </div>
+
+  </template>
+  <script>
+
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          tasks: [
+            { text: '学习Vue2' },
+            { text: '学习React' },
+            { text: '学习Angular' }
+          ],
+          // 当前正在编辑任务索引
+          isEditIndex: -1
+        }
+      },
+      methods: {
+        edit(value) {
+          this.isEditIndex = value
+          console.log("编辑ing");
+
+        },
+        save(value) {
+          this.isEditIndex = -1
+
+        }
+      }
+
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

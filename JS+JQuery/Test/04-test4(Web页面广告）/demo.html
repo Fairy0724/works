@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 229970615 李松蔓 -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web页面广告</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 300vh;
+    }
+
+    /* 左右广告样式 */
+    #ad-left,
+    #ad-right {
+      position: absolute;
+      width: 100px;
+      height: 200px;
+    }
+
+    #ad-left {
+      left: 0;
+      top: 15%;
+    }
+
+    #ad-right {
+      right: 0;
+      top: 15%;
+    }
+
+    /* 左右广告关闭按钮位置（右下角） */
+    #ad-left .close-btn {
+      right: 1px;
+      top: 230px;
+    }
+
+    #ad-right .close-btn {
+      right: 1px;
+      top: 230px;
+    }
+
+    /* 弹窗广告样式 */
+    #ad-pop {
+      position: fixed;
+      left: 90%;
+      transform: translateX(-50%);
+      bottom: -200px;
+      /* 初始在下方外 */
+      width: 300px;
+      height: 200px;
+    }
+
+    /* 弹窗关闭按钮位置（右上角） */
+    #ad-pop .close-btn {
+      top: 5px;
+      right: 5px;
+    }
+
+    /* 关闭按钮通用样式 */
+    .close-btn {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 广告容器 -->
+  <div>
+    <!-- 左 -->
+    <div id="ad-left">
+      <img src="img/ad1.jpg" alt="">
+      <img class="close-btn" src="img/close.png" alt="关闭" onclick="closeAd('ad-left')">
+    </div>
+    <!-- 右 -->
+    <div id="ad-right">
+      <img src="img/ad1.jpg" alt="">
+      <img class="close-btn" src="img/close.png" alt="关闭" onclick="closeAd('ad-right')">
+    </div>
+    <!-- 弹窗 -->
+    <div id="ad-pop">
+      <img src="img/ad2.jpg" alt="">
+      <img class="close-btn" src="img/close.png" alt="关闭" onclick="closePopup()">
+    </div>
+  </div>
+  <script>
+    // 关闭左右广告函数
+    function closeAd(id) {
+      const ad = document.querySelector(`#${id}`);
+      ad.style.display = 'none';
+    }
+
+    // 显示弹窗广告
+    function showPopup() {
+      const popup = document.querySelector('#ad-pop');
+      let pos = -200;
+      const interval = setInterval(() => {
+        if (pos >= 0) {
+          clearInterval(interval);
+        } else {
+          pos += 10;
+          popup.style.bottom = pos + 'px';
+        }
+      }, 10);
+    }
+
+    // 关闭弹窗
+    function closePopup() {
+      const popup = document.querySelector('#ad-pop');
+      let pos = 0;
+      const interval = setInterval(() => {
+        if (pos <= -200) {
+          clearInterval(interval);
+          popup.style.display = 'none';
+        } else {
+          pos -= 10;
+          popup.style.bottom = pos + 'px';
+        }
+      }, 10);
+    }
+
+    // 显示弹窗
+    window.onload = showPopup;
+
+  </script>
+</body>
+
+</html>

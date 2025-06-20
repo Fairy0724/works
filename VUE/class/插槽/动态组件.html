@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>具名插槽</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- 根模板，切换场景 -->
+  <template id="root">
+    <div>
+      <button @click="change1">首页</button>
+      <button @click="change2">档案</button>
+      <button @click="change3">投稿</button>
+    </div>
+    <div>
+      <keep-alive>
+        <component :is="current"></component>
+      </keep-alive>
+    </div>
+  </template>
+
+
+  <script>
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          current: ''
+        }
+      },
+      methods: {
+        change1() {
+          this.current = 'homepage'
+        },
+        change2() {
+          this.current = 'files'
+        },
+        change3() {
+          this.current = 'contribute'
+        }
+      }
+    });
+
+    app.component("homepage", {
+      template: '<h1>首页</h1>'
+    });
+    app.component("files", {
+      template: '<h1>档案</h1>'
+    });
+    app.component("contribute", {
+      template: '<h1>投稿</h1>'
+    });
+
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

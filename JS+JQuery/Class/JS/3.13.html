@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实现继承</title>
+</head>
+
+<body>
+  <script>
+
+    // 函数有proto和prototype属性，对象 __proto__ 
+
+
+
+    // // way1------best way
+    // // 定义 Person 构造函数
+    // function Person(name) {
+    //   this.name = name;
+    // }
+    // // 定义 Worker 构造函数
+    // function Worker(name, salary) {
+    //   // 使用 call 方法调用 Person 构造函数，将 this 指向当前 Worker 实例，并传递 name 参数
+    //   Person.call(this, name);
+    //   this.salary = salary;
+    // }
+    // Worker.prototype = new Person();
+    // const w1 = new Worker('xy', 10000);
+    // console.log(w1.name);
+
+
+    // way2
+    // const personPrptotype = {
+    //   sayName: function () {
+    //     console.log(this.name);
+
+    //   }
+    // }
+    // const person = Object.create(personPrptotype);
+    // person.name = 'xy';
+    // person.sayName();
+
+    // way3
+    // function createNewPerson(person) {
+    //   const temp = new Object(person);
+    //   temp.jump = function () {
+    //     console.log('跳');
+    //   }
+    //   return temp;
+    // }
+    // const person1 = {
+    //   name: '萧逸',
+    //   age: 23,
+    //   run: function () {
+    //     console.log('跑');
+    //   }
+    // }
+    // person1.run();
+    // // 创建 person1 的浅拷贝并添加 jump 方法
+    // const person2 = createNewPerson(person1);
+
+    // // 调用 person2 的 jump 方法
+    // person2.jump();
+
+
+    // way4
+    // function inheritPrototype(sFun, pFun) {
+    //   // 使用 Object.create 创建一个以 pFun.prototype 为原型的新对象
+    //   const myPrototype = Object.create(pFun.prototype);
+    //   // 修正 constructor 属性，使其指向 sFun 构造函数
+    //   myPrototype.constructor = sFun;
+    //   // 将 sFun 的原型设置为新创建的原型对象
+    //   sFun.prototype = myPrototype;
+    // }
+    // // 定义 Person 构造函数
+    // function Person(name) {
+    //   this.name = name;
+    // }
+
+    // // 在 Person 的原型上添加 run 方法
+    // Person.prototype.run = function () {
+    //   console.log("跑");
+    // };
+    // function Worker(name, salary) {
+    //   // 使用 call 方法调用 Person 构造函数，将 this 指向当前 Worker 实例，并传递 name 参数
+    //   Person.call(this, name);
+    //   this.salary = salary;
+    // }
+    // // 实现 Worker 对 Person 的原型继承
+    // inheritPrototype(Worker, Person);
+
+    // // 创建 Worker 实例
+    // const w1 = new Worker("萧逸", 1000);
+
+    // // 打印 Worker 实例
+    // console.log(w1);
+    // w1.run();
+
+
+  </script>
+</body>
+
+</html>

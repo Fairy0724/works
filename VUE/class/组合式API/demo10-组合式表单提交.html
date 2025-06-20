@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>父子传递--组合</title>
+  <style>
+    th,
+    td {
+      border: 1px solid black;
+      /* 边框 */
+      padding: 12px;
+      /* 内边距 */
+      text-align: center;
+      /* 文字居中 */
+    }
+
+    .validate-tip {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+
+      <form-component :add-user="addUser"></form-component>
+
+      <table-component :users="users"></table-component>
+    </div>
+
+
+  </template>
+
+  <template id="form">
+    <div>
+      <div>
+        用户名：<input type="text" v-model="name" />
+      </div>
+      <div>
+        年 龄：<input type="text" v-model="age" />
+      </div>
+
+      <button @click.prevent="handle">提交</button>
+    </div>
+  </template>
+  <template id="table">
+    <div>
+      <table border="1">
+        <thead>
+          <tr>
+            <h1>表单提交</h1>
+            <th>用户名</th>
+            <th>年龄</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(user,index) in users" :key="user.id">
+            <td>{{user.name}}</td>
+            <td>{{user.age}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+  <script>
+    const { ref, createApp } = Vue;
+    const formComponent = {
+      template: '#form',
+      props: {
+        addUser: {
+          type: Function,
+          required: true // 标记为必需，避免未传递时报错
+        }
+      },
+      setup(props) {
+        const name = ref('')
+        const age = ref('')
+
+        const handle = () => {
+          if (name.value && age.value) {
+            const newUser = {
+              id: Date.now(),
+              name: name.value,
+              age: age.value
+            }
+            props.addUser(newUser)
+            name.value = ''
+            age.value = ''
+          }
+        }
+
+        return {
+          name,
+          age,
+          handle
+        }
+      }
+    }
+    const tableComponent = {
+      template: '#table',
+      props: ['users'],
+      setup(props) {
+        return {
+          users: props.users
+        }
+      }
+    }
+    const app = createApp({
+      template: '#root',
+      components: {
+        formComponent,
+        tableComponent
+      },
+      setup() {
+        const users = ref([{ id: 1, name: 'xy', age: 18 }, { id: 2, name: 'zy', age: 20 }])
+        const addUser = (user) => {
+          users.value.push(user)
+        }
+        return {
+          users,
+          addUser
+        }
+
+      }
+    })
+
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

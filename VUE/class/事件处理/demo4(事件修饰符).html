@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>事件修饰符--阻止事件冒泡</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+      <div style="width: 200px;height: 200px;
+      background-color: green;" @click="bigClick">
+        <div style="width: 200px;height: 200px;
+      background-color: purple;" @click.stop="smallCilck">
+        </div>
+      </div>
+    </div>
+
+  </template>
+  <script>
+
+    const app = Vue.createApp({
+      template: "#root",
+      methods: {
+        bigClick(event) {
+          console.log('bigClick');
+
+        },
+        smallClick(event) {
+          console.log('smallClick');
+
+        }
+      }
+
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

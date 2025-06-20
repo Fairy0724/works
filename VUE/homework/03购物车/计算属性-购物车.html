@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>购物车</title>
+  <style>
+    /* 229970615 李松蔓 */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    #top {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      /* 小米橙色背景 */
+      padding: 10px 40px;
+      color: #333;
+      /* 添加橙色分割线 */
+      border-bottom: 2px solid #ff6700;
+    }
+
+    #top .logo {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+
+    #top .logo img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    #top .logo p {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    #top .info {
+      font-size: 10px;
+      color: #333;
+      margin-top: 5px;
+      margin-left: 20px;
+    }
+
+    #top .user {
+      font-size: 14px;
+      color: #333;
+      margin-left: auto;
+    }
+
+    #top .user a {
+      color: #333;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+
+    #top .user a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 32px;
+      /* 增大标题字体 */
+      color: #333;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      /* 表格宽度调整为100% */
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border: none;
+      /* 去掉表格外边框 */
+    }
+
+    th,
+    td {
+      border-top: 1px solid #e5e7eb;
+      /* 仅保留顶部边框 */
+      border-bottom: 1px solid #e5e7eb;
+      /* 仅保留底部边框 */
+      padding: 16px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    th {
+      color: #333;
+    }
+
+    td img {
+      width: 150px;
+      /* 增大图片宽度 */
+      height: 150px;
+      /* 增大图片高度 */
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .good-image {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .count {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+      /* 边框颜色 */
+      border-radius: 4px;
+      /* 圆角 */
+      width: 100%;
+      /* 宽度占满父容器 */
+      height: 40px;
+      /* 高度 */
+      overflow: hidden;
+      /* 确保内容不超出边框 */
+    }
+
+    .count button {
+      background-color: white;
+      /* 按钮背景色 */
+      border: none;
+      /* 去掉按钮边框 */
+      width: 20%;
+      /* 按钮宽度变窄 */
+      height: 100%;
+      /* 按钮高度 */
+      font-size: 18px;
+      /* 按钮字体大小 */
+      cursor: pointer;
+      /* 鼠标悬停时显示手型 */
+    }
+
+    .count button:hover {
+      background-color: #e5e7eb;
+      /* 鼠标悬停时背景色 */
+    }
+
+    .count span {
+      flex: 1;
+      /* 占据剩余空间 */
+      text-align: center;
+      /* 文本居中 */
+      font-size: 18px;
+      /* 字体大小 */
+      line-height: 40px;
+      /* 垂直居中 */
+    }
+
+    td {
+      vertical-align: middle;
+    }
+
+    .sum {
+      color: #ff6700;
+    }
+
+    .total {
+      /* 固定在页面底部 */
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      /* 让元素水平居中 */
+      transform: translateX(-50%);
+      /* 调整居中位置 */
+      width: 90%;
+      /* 与表格宽度一致 */
+      background-color: #fff;
+      border-top: 1px solid #e5e7eb;
+      /* 添加顶部边框 */
+      display: flex;
+      justify-content: space-between;
+      /* 左右对齐 */
+      align-items: center;
+      /* 垂直居中 */
+      padding: 10px 20px;
+      /* 内边距 */
+      font-size: 18px;
+      color: #333;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      /* 添加阴影 */
+
+    }
+
+    .total .left {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .total .right {
+      display: flex;
+      align-items: center;
+    }
+
+    .total .right button {
+      background-color: #ff6700;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      border-radius: 4px;
+      margin-left: 20px;
+    }
+
+    .total .right button:hover {
+      background-color: #e65c00;
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.5);
+      /* 增大复选框 */
+      margin-right: 10px;
+    }
+
+    input[type="checkbox"]:checked {
+      color: white;
+      /* 设置选中时的颜色为橙色 */
+      accent-color: #ff6700;
+    }
+
+    button {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      padding: 10px 20px;
+      /* 增大按钮尺寸 */
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      /* 增大按钮字体 */
+    }
+
+    button:hover {
+      background-color: #e5e7eb;
+    }
+
+    .deleteBtn {
+      background-color: white;
+      color: #d3d3d3;
+      border: none;
+      padding: 10px 20px;
+      /* 增大删除按钮尺寸 */
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      /* 增大删除按钮字体 */
+    }
+
+    .deleteBtn:hover {
+      color: #d9363e;
+      background-color: white;
+
+    }
+
+    .total .left span {
+      color: #ff6700;
+    }
+
+    .total .right .totalPrice {
+      color: #ff6700;
+    }
+
+    .total .right .totalPrice span {
+      font-size: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 229970615 李松蔓 -->
+  <div id="app"></div>
+  <template id="root">
+
+    <div id="top">
+      <div class="logo">
+        <img
+          src="https://ts1.tc.mm.bing.net/th/id/ODLS.e03554ec-0a97-40ff-ab73-831db4d5edbf?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2"
+          alt="logo">
+        <p>我的购物车</p>
+      </div>
+      <div class="info">温馨提示：产品是否购买成功，以最终下单为准，请尽快结算</div>
+      <div class="user">
+        <span>用户中心</span>
+        <a href="#">我的订单</a>
+      </div>
+    </div>
+    <div>
+      <table>
+        <tr>
+          <th>
+            <input type="checkbox" v-model="checkAll">全选
+          </th>
+          <th></th>
+          <th>名称</th>
+          <th>单价</th>
+          <th>数量</th>
+          <th>小计</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="good in AppleList" :key="good.id">
+          <td>
+            <input type="checkbox" v-model="good.checked">
+          </td>
+          <td>
+            <img :src="good.imgSrc" alt="" class="good-image">
+          </td>
+          <td>{{ good.name }}</td>
+          <td>{{ good.price}}元</td>
+          <td>
+            <div class="count">
+              <button @click="decrement(good)">-</button>
+              <span>{{ good.count }}</span>
+              <button @click="increment(good)">+</button>
+            </div>
+          </td>
+          <td>
+            <div class="sum">
+              {{ (good.price * good.count)}}元
+            </div>
+
+          </td>
+          <td>
+            <button @click="deleteGood(good.id)" class="deleteBtn">X</button>
+          </td>
+        </tr>
+      </table>
+      <div class="total">
+        <div class="left">
+          已选商品：<span>{{selectedCount}}</span>件
+        </div>
+        <div class="right">
+          <div class="totalPrice">
+            合计：<span>{{totalPrice}}</span>元
+          </div>
+          <button>去结算</button>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+    // 229970615 李松蔓
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          AppleList: [
+            { id: "1", name: "iPhone16ProMax", price: 15999, count: 1, checked: false, imgSrc: "https://ts2.tc.mm.bing.net/th/id/OIP-C.8kJZviyhfcPKsbXA3-i84gAAAA?cb=iwc2&rs=1&pid=ImgDetMain" },
+            { id: "2", name: "iPadPro", price: 8999, count: 1, checked: false, imgSrc: "https://ts4.tc.mm.bing.net/th/id/OIP-C.V29ZqYuG83h1sLKMACwEfgHaHa?cb=iwc2&rs=1&pid=ImgDetMain" },
+            { id: "3", name: "airPods4", price: 1400, count: 1, checked: false, imgSrc: "https://ts1.tc.mm.bing.net/th/id/OIP-C.mtyFi5UEq8XVQ5t8Ay44fAHaHa?cb=iwc2&rs=1&pid=ImgDetMains" }
+          ]
+        };
+      },
+      methods: {
+        increment(good) {
+          good.count++;
+        },
+        decrement(good) {
+          if (good.count > 1) good.count--;
+        },
+        deleteGood(goodId) {
+          // 根据id删除商品
+          this.AppleList = this.AppleList.filter(good => good.id !== goodId);
+        }
+      },
+      computed: {
+        // 全选逻辑
+        checkAll: {
+          get() {
+            return this.AppleList.every(good => good.checked);
+          },
+          set(value) {
+            this.AppleList.forEach(good => good.checked = value);
+          }
+        },
+        // 总价计算
+        totalPrice() {
+          return this.AppleList.reduce((sum, good) => {
+            return good.checked ? sum + (good.price * good.count) : sum;
+          }, 0);
+        },
+        // 计算已选商品数量
+        selectedCount() {
+          return this.AppleList.filter(good => good.checked).length;
+        }
+      }
+    }).mount("#app");
+  </script>
+</body>
+
+</html>

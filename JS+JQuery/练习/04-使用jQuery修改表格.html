@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery-练习4</title>
+  <style type="text/css">
+    body {
+      font-size: 13px;
+      line-height: 25px;
+    }
+
+    table {
+      border-top: 1px solid #333;
+      border-left: 1px solid #333;
+      width: 300px;
+    }
+
+    td {
+      border-right: 1px solid #333;
+      border-bottom: 1px solid #333;
+    }
+
+    .center {
+      text-align: center;
+    }
+  </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.0/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script>
+    // 229970615  李松蔓
+    $(function () {
+      // 增加一行
+      $('#b1').click(function () {
+        const newRow = $('<tr>').append(
+          $('<td>').text("幸福从天而降"),
+          $('<td>').html("&yen;18.50").addClass('center')
+        );
+        $('#row3').before(newRow);
+      });
+
+      // 删除第2行
+      $('#b2').click(function () {
+        $('tr').eq(2).remove();
+      });
+
+      // 修改标题样式
+      $('#b3').click(function () {
+        $('#row1').css({
+          "font-weight": "bold",
+          "text-align": "center",
+          "background-color": "#cccccc"
+        });
+      });
+
+      // 复制最后一行
+      $('#b4').click(function () {
+        const lastRow = $('tr:last');
+        lastRow.clone().attr('id', '').appendTo('#myTable');
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <table border="0" cellspacing="0" cellpadding="0" id="myTable">
+    <tr id="row1">
+      <td>书名</td>
+      <td>价格</td>
+    </tr>
+    <tr id="row2">
+      <td>看得见风景的房间</td>
+      <td class="center">&yen;30.00</td>
+    </tr>
+    <tr id="row3">
+      <td>60个瞬间</td>
+      <td class="center">&yen;32.00</td>
+    </tr>
+  </table>
+  <input id="b1" type="button" value="增加一行" />
+  <input id="b2" type="button" value="删除第2行" />
+  <input id="b3" type="button" value="修改标题样式" />
+  <input id="b4" type="button" value="复制最后一行" />
+
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>Vue指令实现下拉菜单效果</title>
+
+  <style>
+    /* 229970615 李松蔓 */
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: #ededed;
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+
+    .header-right img {
+      align-self: flex-end;
+    }
+
+    .header-right span {
+      color: #d40000;
+    }
+
+    /* 搜索框样式 */
+    .search-box input {
+      padding: 5px;
+      margin-right: 5px;
+    }
+
+    .header-right .search-box button {
+      padding: 5px 10px;
+      background-color: #d40000;
+      color: white;
+      border: none;
+    }
+
+    .nav {
+      background-color: #d40000;
+      width: 100%;
+      height: 100px;
+    }
+
+    .nav-list {
+      display: flex;
+      flex-direction: row;
+      font-size: 20px;
+      color: white;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .nav-list li {
+      padding: 30px 0 15px 0;
+    }
+
+
+    .nav-item {
+      position: relative;
+      /* 下拉菜单绝对定位参考 */
+      color: white;
+      padding: 0 15px;
+      /* 导航项内边距 */
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-item :last-child {
+      border-right: none;
+      /* 移除最后一个导航项的右侧边框 */
+    }
+
+    .nav-item span {
+      font-size: 14px;
+      display: block;
+      text-align: center;
+      /* 中英文间距 */
+      margin-top: 5px;
+    }
+
+    /* 悬浮状态：深红色背景 */
+    .nav-item:hover {
+      background-color: red;
+    }
+
+    /* 悬浮显示下拉菜单 */
+    .nav-item:hover .nav-sub {
+      display: block;
+    }
+
+    /* 首页激活样式 */
+    .nav-item.active {
+      font-weight: bold;
+      background-color: red;
+    }
+
+    /* 下拉菜单样式 */
+    .nav-sub {
+      font-size: 16px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: red;
+      color: white;
+      align-items: center;
+      /* 默认隐藏 */
+      display: none;
+      width: 100%;
+    }
+
+    .nav-sub li {
+      /* 子菜单项垂直间距 */
+      padding: 10px 0;
+      text-align: center;
+      color: white;
+    }
+
+    .nav-sub li:hover {
+      color: #ffd7d7;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 229970615 李松蔓 -->
+  <div id="app"></div>
+  <template id="root">
+    <!-- 顶部信息 -->
+    <div class="top">
+      <img src="img/logo.png" alt="" width="362" height="89" border="0">
+      <!-- 右侧 -->
+      <div class="header-right">
+        <img src="img/icon-18.png" width="200" height="30">
+        <span>设为首页 | 加入收藏 | 热线：023-65312300（沙坪坝片区）023-63303457（渝中片区）| English</span>
+        <div class="search-box">
+          <input type="text" placeholder="请输入搜索关键词">
+          <button>搜索</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="nav">
+      <!-- 父级菜单 -->
+      <ul class="nav-list">
+        <li class="nav-item" v-for="(item,index) in navItems" :key="index" :class="{ active:index === 0 }">
+          <!-- <a href=""> -->
+            {{item.text}}
+          <!-- </a> -->
+          <span>{{item.eng}}</span>
+          <!-- 子菜单 -->
+          <ul class="nav-sub" v-if="item.subItems.length>0">
+            <li v-for="(subItem,index) in item.subItems" :key="index">
+              {{subItem}}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </template>
+  <script>
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          navItems: [
+            {
+              text: '首页',
+              eng: 'Home',
+              subItems: []
+            },
+            {
+              text: '关于红岩',
+              eng: 'HongYan',
+              subItems: [
+                '红岩文化',
+                '博物馆机构',
+                '历史沿革'
+              ]
+            }, {
+              text: '公告动态',
+              eng: 'Dynamics',
+              subItems: [
+                '文博信息',
+                '政务平台',
+                '公告',
+                '专题报道'
+              ]
+            }, {
+              text: '馆藏精品',
+              eng: 'Collections',
+              subItems: [
+                '一级文物',
+                '二级文物',
+                '三级文物'
+              ]
+            }, {
+              text: '陈列展览',
+              eng: 'Exhibition',
+              subItems: [
+                '虚拟展览',
+                '基本陈列',
+                '复原陈列',
+                '临时展览',
+                '展览交流'
+              ]
+            }, {
+              text: '研究开发',
+              eng: 'Research',
+              subItems: [
+                '历史研究',
+                '艺术创作',
+                '影音在线',
+                '文创产品'
+              ]
+            }, {
+              text: '公共教育',
+              eng: 'Education',
+              subItems: [
+                '党性教育',
+                '爱国主义教育',
+                '研学实践教育',
+                '科普教育'
+              ]
+            }, {
+              text: '参观服务',
+              eng: 'Service',
+              subItems: [
+                '景点介绍',
+                '景区登记',
+                '志愿服务',
+                '服务内容'
+              ]
+            }, {
+              text: '景区登记',
+              eng: 'Reservation',
+              subItems: []
+            }
+          ]
+        }
+      }
+
+    }).mount("#app")
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>小米商城首页手机模块的设计与实现</title>
+  <style>
+    /* 229970615 李松蔓 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    #app {
+      width: 90%;
+      margin: 20px auto;
+    }
+    .phone {
+      background-color: #f5f5f5;
+      padding: 10px;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .top h2 {
+      color: #333;
+    }
+    .top a {
+      font-size: 14px;
+      color: #666;
+      text-decoration: none;
+    }
+    .top a:hover {
+      color: #ff6700;
+    }
+    .message {
+      display: flex;
+      gap: 10px
+    }
+    ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .left {
+      flex: 1;
+      background-color: #fff;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .left img {
+      max-width: 100%;
+      max-height: 100%;
+      /* 图片设置为块级元素 */
+      display: block;
+      /* 自动水平居中 */
+      margin: auto;
+    }
+    .phone-list {
+      flex: 3;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .phone-item {
+      background-color: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s,
+        box-shadow 0.3s;
+      height: auto;
+    }
+    .phone-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .phone-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .phone-item h3 {
+      font-size: 16px;
+      color: #333;
+      margin: 10px 0;
+    }
+    .phone-item .des {
+      font-size: 12px;
+      color: #999;
+      margin: 5px 0;
+      display: -webkit-box;
+      /* 必须使用 flexbox */
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      /* 设置盒子方向为垂直 */
+      -webkit-box-orient: vertical;
+      /* 超出部分隐藏 */
+      overflow: hidden;
+    }
+
+    .phone-item .price {
+      font-size: 16px;
+      color: #ff6700;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .phone-item .price del {
+      /* 禁用 <del> 标签的默认删除线 */
+      text-decoration: none;
+    }
+
+    .phone-item .old-price {
+      text-decoration: line-through;
+      text-decoration-color: #999;
+      color: #999;
+      margin-left: 5px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 229970615 李松蔓 -->
+  <div id="app"></div>
+  <template id="root">
+
+    <div class="phone">
+      <div class="top">
+        <h2>手机</h2>
+        <a href="#">查看更多 ></a>
+      </div>
+      <div class="message">
+        <div class="left">
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/55d2e50dd3783b52244ea3938e9dfca7.png?thumb=1&w=351&h=921&f=webp&q=90"alt="">
+        </div>
+        <ul class="phone-list">
+          <li class="phone-item" v-for="phone in phoneList" :key="phone.id">
+            <img width="160" height="160" :src="phone.img" alt="">
+            <h3 class="title">
+              {{ phone.title }}
+            </h3>
+            <p class="des">
+              {{ phone.des }}
+            </p>
+            <p class="price">
+              <span class="num">
+                {{ phone.price }}
+              </span>
+              &nbsp;
+              <del>
+                <span class="old-price" v-if="phone.oldPrice">{{phone.oldPrice}}</span>
+              </del>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </template>
+  <script>
+    // 229970615 李松蔓
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          phoneList: [
+            {
+              id: "10001",
+              img: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5ed659adaedf3b33ed141930314e8bd1.png?thumb=1&w=300&h=300&f=webp&q=90", // 替换为实际图片路径
+              title: "REDMI Turbo 4 Pro",
+              des: " Turbo 4 Pro 好看，更能打！",
+              price: "1999元起",
+              oldPrice: "2199元"
+            },
+            {
+              id: "10002",
+              img: "https://cdn.cnbj1.fds.api.mi-img.com/nr-pub/202502251811_93715df0882e43e252843e3c7b775570.png?thumb=1&w=300&h=300&f=webp&q=90",
+              title: "Xiaomi 15 Ultra",
+              des: "徕卡1英寸主摄 | 徕卡2亿超级长焦 | 徕卡超纯光学系统 | 骁龙8至尊版移动平台 | 6000mAh 小米金沙江电池 | 小米澎湃OS 2",
+              price: "6499元起"
+            },
+            {
+              id: "10003",
+              img: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/00eb27ead9512a7f12604ad3469460b6.png?thumb=1&w=300&h=300&f=webp&q=90",
+              title: "Redmi Turbo 4",
+              des: "REDMI Turbo 4 好看又能打",
+              price: "1699元起",
+              oldPrice: "1999元"
+            },
+            {
+              id: "10004",
+              img: "https://cdn.cnbj1.fds.api.mi-img.com/nr-pub/202412271148_a4cb76ca76ad26ac81da44ad1a69ebd1.png?thumb=1&w=300&h=300&f=webp&q=90",
+              title: "Redmi 14C",
+              des: "【持久续航】5160mAh 大电池",
+              price: "469元起"
+            },
+            {
+              id: "10005",
+              img: "https://cdn.cnbj1.fds.api.mi-img.com/nr-pub/202411261127_8d9eefc4ea604b3c2c20ef4df1312591.png?thumb=1&w=300&h=300&f=webp&q=90",
+              title: "REDMI K80 Pro",
+              des: "骁龙8至尊版|2K新国屏|全焦段影像",
+              price: "3299元起",
+              oldPrice: "3699元"
+            },
+            {
+              id: "10006",
+              img: "https://cdn.cnbj1.fds.api.mi-img.com/nr-pub/202411261112_496adbd3fa76742689e9b8f5c4251efc.png?thumb=1&w=240&h=240&f=webp&q=90",
+              title: "REDMI K80",
+              des: "第三代骁龙8|狂暴引擎4.0|2K新国屏|小米青山护眼2.0|6550mAh超长续航|90W闪充|IP68|超声波指纹",
+              price: "2299元起",
+              oldPrice: "2499元"
+            },
+            {
+              id: "10007",
+              img: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/089128152bd814096a99249a487e383d.png?thumb=1&w=240&h=240&f=webp&q=90",
+              title: "Xiaomi 15",
+              des: "徕卡光学 Summilux 高速镜头｜骁龙®8至尊版移动平台｜5400mAh 小米金沙江电池 小米澎湃OS 2｜全生态AI助手 超级小爱｜低功耗超级阳光屏",
+              price: "4099元起",
+              oldPrice: "4199元"
+            },
+            {
+              id: "10008",
+              img: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5f4d5d4fa89236436e9d44e2b2e6ebac.png?thumb=1&w=240&h=240&f=webp&q=90",
+              title: "Xiaomi 15 Pro",
+              des: "徕卡光学 Summilux 高速镜头｜骁龙®8至尊版移动平台｜6100mAh 小米金沙江电池 120mm 徕卡潜望长焦 ｜小米澎湃OS 2｜全生态AI助手 超级小爱",
+              price: "4999元起"
+            }
+          ]
+        }
+      }
+
+    }).mount("#app")
+  </script>
+</body>
+
+</html>

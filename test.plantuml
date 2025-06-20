@@ -1,0 +1,57 @@
+@startuml
+title 基于Vue+json-server的在线商城分层架构图
+
+' 定义样式
+skinparam defaultFontName SimHei
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam monochrome true
+skinparam arrowThickness 1.5
+skinparam arrowColor #333333
+
+' 整体框架
+frame "在线商城系统架构" as System {
+    
+    
+     ' 表示层
+    package "表示层" as PresentationLayer {
+        [商品展示组件] as ProductView
+        [购物车组件] as CartView
+        [订单组件] as OrderView
+        [用户中心组件] as UserView
+    }
+    
+    ' 应用层
+    package "应用层" as ApplicationLayer {
+        [商品管理服务] as ProductService
+        [购物车服务] as CartService
+        [订单服务] as OrderService
+        [用户服务] as UserService
+    }
+    
+    ' 服务层
+    package "服务层" as ServiceLayer {
+        [API适配器] as ApiAdapter
+        [json-server模拟服务] as JsonServer
+        [db.json数据存储] as MockData
+    }
+    
+    ' 资源层
+    package "资源层" as ResourceLayer {
+        [JSON文件存储] as JsonStorage
+        [LocalStorage缓存] as LocalCache
+    }
+}
+
+' 层级关系（垂直排列）
+PresentationLayer --> ApplicationLayer : 调用服务
+ApplicationLayer -down-> ServiceLayer : 数据请求
+ServiceLayer -down-> ResourceLayer : 读写数据
+
+' 服务层内部关系
+ApiAdapter --> JsonServer : API调用
+JsonServer --> MockData : 读取模拟数据
+JsonServer --> JsonStorage : 持久化数据
+ApiAdapter --> LocalCache : 使用缓存
+
+@enduml

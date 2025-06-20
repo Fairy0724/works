@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <script src="https://unpkg.com/@vueuse/shared"></script>
+  <script src="https://unpkg.com/@vueuse/core"></script>
+  <title>useDark</title>
+  <style>
+    .dark {
+      background-color: #222;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"> </div>
+  <template id="root">
+    <button @click="toggleDark()">light</button>
+  </template>
+
+  <script>
+    const { ref } = Vue
+
+
+    // app应用实例
+    const app = Vue.createApp({
+      template: "#root",
+      setup() {
+        const { useDark, useToggle } = VueUse
+        const isDark = useDark()
+        const toggleDark = useToggle(isDark)
+        return {
+          isDark,
+          toggleDark
+        }
+      }
+
+    })
+    // root根组件实例
+    app.mount('#app')
+  </script>
+
+</body>
+
+</html>

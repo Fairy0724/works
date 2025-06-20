@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>组件</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+      {{message}}
+    </div>
+    <!-- 向子组件传递 props -->
+      <mycomponent notice="这是一个通知" abc="123"></mycomponent>
+    
+  </template>
+
+   <template id="mycomponent">
+    <div>
+      {{message}}
+      Props - Notice: {{ notice }}
+      Props - ABC: {{ abc }}
+    </div>
+  </template>
+  <script>
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          message: '组件注册'
+        }
+      },
+
+    }
+    )
+
+    // 全局注册组件
+    app.component("mycomponent",{
+      template: "#mycomponent",
+      data() {
+        return {
+          message: '自定义组件'
+        }
+      },
+      props:['notice','abc']
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

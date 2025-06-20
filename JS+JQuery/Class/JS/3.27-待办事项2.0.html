@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简易待办事项列表</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .todo-form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    #todo-input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px 0 0 4px;
+      font-size: 16px;
+    }
+
+    #add-button {
+      padding: 10px 15px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #add-button:hover {
+      background-color: #45a049;
+    }
+
+    .todo-list {
+      list-style-type: none;
+    }
+
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .todo-text {
+      flex: 1;
+      margin-left: 10px;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .delete-button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .delete-button:hover {
+      background-color: #d32f2f;
+    }
+
+    .todo-count {
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+    }
+
+    #clear-all-button {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 15px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #clear-all-button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>我的待办事项</h1>
+
+    <div class="todo-form">
+      <input type="text" id="todo-input" placeholder="添加新的待办事项...">
+      <button id="add-button">添加</button>
+    </div>
+
+    <ul class="todo-list" id="todo-list">
+      <!-- 待办事项将在这里动态添加 -->
+    </ul>
+
+    <button id="clear-all-button">清空所有</button>
+
+    <div class="todo-count" id="todo-count">
+      当前有 <span id="count">0</span> 个待办事项
+    </div>
+  </div>
+
+  <script>
+    const todoInput = document.querySelector('#todo-input');
+    const todoList = document.querySelector('#todo-list');
+    const count = document.querySelector('#count');
+    const addButton = document.querySelector('#add-button');
+    const clearAllButton = document.querySelector('#clear-all-button');
+
+    // 从 localStorage 加载待办事项
+    function loadTodos() {
+      const todos = JSON.parse(localStorage.getItem('todos')) || [];
+      todos.forEach(todo => {
+        const todoItem = document.createElement('li');
+        todoItem.classList.add('todo-item');
+
+        const checkInput = document.createElement('input');
+        checkInput.setAttribute('type', 'checkbox');
+        checkInput.checked = todo.completed;
+        checkInput.addEventListener('change', function () {
+          const span = this.nextElementSibling;
+          span.classList.toggle('completed');
+          updateTodosInLocalStorage();
+        });
+
+        const span = document.createElement('span');
+        span.classList.add('todo-text');
+        if (todo.completed) {
+          span.classList.add('completed');
+        }
+        span.innerText = todo.text;
+
+        const delButton = document.createElement('button');
+        delButton.classList.add('delete-button');
+        delButton.innerText = '删除';
+        delButton.addEventListener('click', function (event) {
+          event.target.parentNode.remove();
+          count.innerText = parseInt(count.innerText) - 1;
+          updateTodosInLocalStorage();
+        });
+
+        todoItem.appendChild(checkInput);
+        todoItem.appendChild(span);
+        todoItem.appendChild(delButton);
+
+        todoList.appendChild(todoItem);
+        count.innerText = parseInt(count.innerText) + 1;
+      });
+    }
+
+    // 将待办事项保存到 localStorage
+    function updateTodosInLocalStorage() {
+      const todos = [];
+      const todoItems = todoList.querySelectorAll('.todo-item');
+      todoItems.forEach(item => {
+        const text = item.querySelector('.todo-text').innerText;
+        const completed = item.querySelector('input[type="checkbox"]').checked;
+        todos.push({ text, completed });
+      });
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    // 添加待办事项
+    addButton.addEventListener('click', function () {
+      const todoText = todoInput.value.trim();
+      if (todoText) {
+        const todoItem = document.createElement('li');
+        todoItem.classList.add('todo-item');
+
+        const checkInput = document.createElement('input');
+        checkInput.setAttribute('type', 'checkbox');
+        checkInput.addEventListener('change', function () {
+          const span = this.nextElementSibling;
+          span.classList.toggle('completed');
+          updateTodosInLocalStorage();
+        });
+
+        const span = document.createElement('span');
+        span.classList.add('todo-text');
+        span.innerText = todoText;
+
+        const delButton = document.createElement('button');
+        delButton.classList.add('delete-button');
+        delButton.innerText = '删除';
+        delButton.addEventListener('click', function (event) {
+          event.target.parentNode.remove();
+          count.innerText = parseInt(count.innerText) - 1;
+          updateTodosInLocalStorage();
+        });
+
+        todoItem.appendChild(checkInput);
+        todoItem.appendChild(span);
+        todoItem.appendChild(delButton);
+
+        todoList.appendChild(todoItem);
+        count.innerText = parseInt(count.innerText) + 1;
+        todoInput.value = ''; // 清空输入框
+        // 更新LocalStorage
+        updateTodosInLocalStorage();
+      }
+    });
+
+    // 清空所有待办事项
+    clearAllButton.addEventListener('click', function () {
+      todoList.innerHTML = '';
+      count.innerText = '0';
+      localStorage.removeItem('todos');
+    });
+
+    console.log(window.localStorage);
+
+    // 页面加载时加载待办事项
+    loadTodos();
+  </script>
+</body>
+
+</html>

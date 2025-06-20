@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实验六</title>
+</head>
+
+<body>
+  <script>
+    // 229970615 李松蔓
+    // 定义 Promise 的三种状态
+    const PENDING = 'pending';
+    const FULFILLED = 'fulfilled';
+    const REJECTED = 'rejected';
+
+    // 自定义 Promise 构造函数
+    function Promise(executor) {
+      // 初始状态为 pending
+      this.status = PENDING;
+      // 成功时的值
+      this.value = undefined;
+      // 失败时的原因
+      this.reason = undefined;
+      // 存储成功回调的队列
+      this.onFulfilledCallbacks = [];
+      // 存储失败回调的队列
+      this.onRejectedCallbacks = [];
+
+      // 定义 resolve 函数
+      // 将 Promise 状态从 pending 变为 fulfilled
+      const resolve = (value) => {
+        if (this.status === PENDING) {
+          this.status = FULFILLED;
+          // 保存成功的值
+          this.value = value;
+          // 遍历成功回调队列，依次执行回调函数并传入成功的值
+          this.onFulfilledCallbacks.forEach(callback => callback(this.value));
+        }
+      };
+
+      // 定义 reject 函数
+      // 将 Promise 状态从 pending 变为 rejected
+      const reject = (reason) => {
+        // 只有当状态为 pending 时才能进行状态变更
+        if (this.status === PENDING) {
+          this.status = REJECTED;
+          this.reason = reason;
+          // 遍历失败回调队列，依次执行回调函数并传入失败的原因
+          this.onRejectedCallbacks.forEach(callback => callback(this.reason));
+        }
+      };
+
+      // 立即执行执行器函数
+      try {
+        // 执行器函数接收 resolve 和 reject 作为参数
+        executor(resolve, reject);
+      } catch (error) {
+        // 如果执行器函数抛出错误，调用 reject 函数并传入错误信息
+        reject(error);
+      }
+    }
+
+    // 为 Promise 原型添加 then 方法
+    // 用于处理 Promise 的结果
+    Promise.prototype.then = function (onFulfilled, onRejected) {
+      // 处理 onFulfilled 不是函数的情况
+      // 若不是函数则返回一个直接返回值的函数
+      onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value;
+      // 处理 onRejected 不是函数的情况
+      // 若不是函数则返回一个抛出错误的函数
+      onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason; };
+
+      // 创建一个新的 Promise 实例，用于链式调用
+      const newPromise = new Promise((newResolve, newReject) => {
+        // 如果当前 Promise 状态为 fulfilled
+        if (this.status === FULFILLED) {
+          // 使用 setTimeout 异步执行回调，以确保 then 方法返回的是新的 Promise
+          setTimeout(() => {
+            try {
+              // 执行成功回调函数并获取结果
+              const result = onFulfilled(this.value);
+              // 调用辅助函数处理回调结果
+              resolvePromise(newPromise, result, newResolve, newReject);
+            } catch (error) {
+              // 如果执行回调函数时抛出错误，调用新 Promise 的 reject 方法
+              newReject(error);
+            }
+          }, 0);
+        }
+        // 如果当前 Promise 状态为 rejected
+        else if (this.status === REJECTED) {
+          // 使用 setTimeout 异步执行回调
+          setTimeout(() => {
+            try {
+              // 执行失败回调函数并获取结果
+              const result = onRejected(this.reason);
+              // 调用辅助函数处理回调结果
+              resolvePromise(newPromise, result, newResolve, newReject);
+            } catch (error) {
+              // 如果执行回调函数时抛出错误，调用新 Promise 的 reject 方法
+              newReject(error);
+            }
+          }, 0);
+        }
+        // 如果当前 Promise 状态为 pending
+        else {
+          // 将成功回调函数添加到成功回调队列中
+          this.onFulfilledCallbacks.push((value) => {
+            // 使用 setTimeout 异步执行回调
+            setTimeout(() => {
+              try {
+                // 执行成功回调函数并获取结果
+                const result = onFulfilled(value);
+                // 调用辅助函数处理回调结果
+                resolvePromise(newPromise, result, newResolve, newReject);
+              } catch (error) {
+                // 如果执行回调函数时抛出错误，调用新 Promise 的 reject 方法
+                newReject(error);
+              }
+            }, 0);
+          });
+
+          // 将失败回调函数添加到失败回调队列中
+          this.onRejectedCallbacks.push((reason) => {
+            // 使用 setTimeout 异步执行回调
+            setTimeout(() => {
+              try {
+                // 执行失败回调函数并获取结果
+                const result = onRejected(reason);
+                // 调用辅助函数处理回调结果
+                resolvePromise(newPromise, result, newResolve, newReject);
+              } catch (error) {
+                // 如果执行回调函数时抛出错误，调用新 Promise 的 reject 方法
+                newReject(error);
+              }
+            }, 0);
+          });
+        }
+      });
+
+      // 返回新的 Promise 实例，实现链式调用
+      return newPromise;
+    };
+
+    // 辅助函数：处理 then 回调的返回值
+    function resolvePromise(newPromise, result, resolve, reject) {
+      // 避免循环引用，如果新 Promise 和结果是同一个对象，抛出类型错误
+      if (newPromise === result) {
+        return reject(new TypeError('Chaining cycle detected for promise'));
+      }
+      // 如果结果是一个 Promise 实例
+      if (result instanceof Promise) {
+        // 调用结果 Promise 的 then 方法，将 resolve 和 reject 传递给它
+        result.then(resolve, reject);
+      } else {
+        // 如果结果不是 Promise 实例，直接调用 resolve 方法
+        resolve(result);
+      }
+    }
+
+    // 测试成功场景
+    const successPromise = new Promise((resolve) => {
+      // 延迟 1 秒后调用 resolve 方法，将 Promise 状态变为 fulfilled
+      setTimeout(() => {
+        resolve('成功！');
+      }, 1000);
+    });
+
+    // 调用 then 方法处理成功结果
+    successPromise.then((value) => {
+      // 打印成功回调信息
+      console.log('成功回调:', value);
+      // 返回一个新的值，用于链式调用
+      return '链式调用第一步';
+    }).then((value) => {
+      // 打印链式回调信息
+      console.log('链式回调:', value);
+    });
+
+    // 测试失败场景
+    const errorPromise = new Promise((_, reject) => {
+      // 延迟 0.5 秒后调用 reject 方法，将 Promise 状态变为 rejected
+      setTimeout(() => {
+        reject(new Error('操作失败'));
+      }, 500);
+    });
+
+    // 调用 then 方法处理失败结果
+    errorPromise.then(null, (reason) => {
+      // 打印失败回调信息
+      console.error('失败回调:', reason.message);
+    });
+
+    // 测试错误捕获
+    const errorInExecutor = new Promise((resolve, reject) => {
+      // 抛出一个错误，触发 reject 方法
+      throw new Error('执行器内部错误');
+    });
+
+    // 调用 then 方法处理错误结果
+    errorInExecutor.then(null, (reason) => {
+      // 打印执行器错误信息
+      console.error('执行器错误:', reason.message);
+    });
+  </script>
+</body>
+
+</html>

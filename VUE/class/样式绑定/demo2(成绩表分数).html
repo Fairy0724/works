@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Document</title>
+  <style>
+    .bjg {
+      color: red;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      /* 边框 */
+      padding: 12px;
+      /* 内边距 */
+      text-align: center;
+      /* 文字居中 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <!-- <div>
+      <div class="mycolor mysize">{{message}}</div>
+      
+      <div :class="['mycolor','mysize']">{{message}}</div>
+      <div :class="myclasses">{{message}}</div>
+      <div :class="['mycolor',flag>1?'mysize':'']">{{message}}</div>
+    </div> -->
+    <table>
+      <thead>
+        <tr>
+          <th>学号</th>
+          <th>名字</th>
+          <th>性别</th>
+          <th>成绩</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(student,index) in students" :key="student.name">
+          <td>{{index+1}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.sex}}</td>
+          <td>
+            <span :class="student.score<60?'bjg':''">{{student.score}}</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </template>
+  <script>
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          students: [
+            { name: 'Alice', sex: '女', score: 92 },
+            { name: 'Bob', sex: '男', score: 88 },
+            { name: 'Charlie', sex: '男', score: 55 }
+          ]
+        }
+      }
+    })
+    const root = app.mount('#app')
+  </script>
+</body>
+
+</html>

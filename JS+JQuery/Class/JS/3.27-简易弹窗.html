@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>顶部横幅广告</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 200vh;
+    }
+
+    #banner-ad {
+      position: fixed;
+      top: -100px;
+      /* 初始隐藏位置 */
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background-color: #ffcc00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: top 0.5s ease;
+      /* 添加过渡动画 */
+    }
+
+    #banner-ad.active {
+      top: 0;
+      /* 显示位置 */
+    }
+
+    #banner-ad .close-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #banner-ad .close-btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', () => {
+      // 创建广告容器
+      const bannerAd = document.createElement('div');
+      bannerAd.id = 'banner-ad';
+
+      // 广告内容
+      const adContent = document.createElement('div');
+      adContent.textContent = '欢迎访问荔枝烧蓝莓网站';
+      adContent.style.fontSize = '24px';
+      adContent.style.color = '#333';
+
+      // 关闭按钮
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'close-btn';
+      closeBtn.innerHTML = '×';
+      closeBtn.title = '关闭广告';
+
+      // 组装元素
+      bannerAd.appendChild(adContent);
+      bannerAd.appendChild(closeBtn);
+      document.body.appendChild(bannerAd);
+
+      // 添加显示动画
+      setTimeout(() => {
+        bannerAd.classList.add('active');
+      }, 500);
+
+      // 关闭按钮点击事件
+      closeBtn.addEventListener('click', () => {
+        bannerAd.classList.remove('active');
+        // 等待过渡动画完成后再移除元素
+        setTimeout(() => {
+          bannerAd.remove();
+        }, 500);
+      });
+
+      // 可选：3秒后自动关闭
+      // setTimeout(() => {
+      //   closeBtn.click();
+      // }, 3000);
+    });
+  </script>
+</body>
+
+</html>

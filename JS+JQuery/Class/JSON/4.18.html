@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON</title>
+</head>
+
+<body>
+  <script>
+    let obj = { "name": "zs", "age": 21 }
+    const str = JSON.stringify(obj)//序列化
+    obj = JSON.parse(str)//反序列化
+
+
+    // 深拷贝
+    function jsonDeepCopy(target) {
+      return JSON.parse(JSON.stringify(target));
+    }
+  </script>
+</body>
+
+</html>

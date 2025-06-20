@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>watch</title>
+</head>
+
+<body>
+  <div id="app"> </div>
+  <template id="root">
+    <input type="text" v-model.lazy="person.age">
+  </template>
+
+  <script>
+
+    const { computed, ref } = Vue//解构
+    // app应用实例
+    const app = Vue.createApp({
+      template: "#root",
+      setup() {
+        const person = ref({
+          age: 25
+        })//响应式数据
+        watch(person,(newVal,oldVal)=>{
+          console.log(newVal,'年龄变了')
+        },{
+          deep:true
+        })
+        return {
+          person
+        }
+      }
+
+    //   data() {
+    //     return {
+    //       person:{
+    //         age:25
+    //       }
+    //     }
+    //   },
+    //   watch:{
+    //     'person.age':{
+    //       handler(newVal,oldVal){
+    //         console.log("newVal",newVal)
+    //         console.log("oldVal",oldVal)
+    //       },
+    //       deep:true
+    //     }
+    //   }
+
+    })
+    // root根组件实例
+    app.mount('#app')
+  </script>
+
+</body>
+
+</html>

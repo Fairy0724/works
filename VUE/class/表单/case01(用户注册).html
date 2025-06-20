@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <title>用户注册</title>
+    <style>
+      th,
+      td {
+        border: 1px solid black;
+        /* 边框 */
+        padding: 12px;
+        /* 内边距 */
+        text-align: center;
+        /* 文字居中 */
+      }
+
+      .validate-tip {
+        color: green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <template id="root">
+      <div>
+        <h1>用户注册</h1>
+        <div>
+          用户名：<input type="text" v-model="username" />
+          <span v-if="usernameValid" class="validate-tip">校验通过</span>
+        </div>
+        <div>
+          密 码：<input type="text" v-model="password" />
+          <span v-if="passwordValid" class="validate-tip">校验通过</span>
+        </div>
+        <div>
+          性 别：
+          <input name="gender" type="radio" value="男" v-model="gender" style="zoom: 150%" />男
+          <input name="gender" type="radio" value="女" v-model="gender" style="zoom: 150%" />女
+        </div>
+
+        <div>
+          地 址：
+          <select v-model="city">
+            <option value="" disabled>请选择</option>
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+          </select>
+        </div>
+        <button @click="handle">注册</button>
+        <button>修改</button>
+      </div>
+
+      <div>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>用户名</th>
+              <th>性别</th>
+              <th>地址</th>
+              <th>编辑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(user,index) in users" :key="user.id">
+              <td>{{index+1}}</td>
+              <td>{{user.name}}</td>
+              <td>{{user.sex}}</td>
+              <td>{{user.city}}</td>
+              <td>
+                <button>删除</button>
+                <!-- <button @click="delete">删除</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </template>
+    <script>
+      const app = Vue.createApp({
+        template: '#root',
+        data() {
+          return {
+            username: '',
+            password: '',
+            gender: '',
+            city: '',
+            users: [{ id: '1', name: 'xy', sex: '男', city: '上海' }],
+            usernameValid: false,
+            passwordValid: false,
+          }
+        },
+        methods: {
+          // 注册
+          handle() {
+            const isUsernameValid = this.username.trim() !== ''
+            const isPasswordValid = this.password.length >= 6 && this.password.length <= 12
+
+            if (this.username && this.gender && this.city && isUsernameValid && isPasswordValid) {
+              return
+            }
+
+            const newUser = {
+              id: Date.now(),
+              name: this.username,
+              sex: this.gender,
+              city: this.city,
+            }
+
+            this.users.push(newUser)
+          },
+          // delete(value) {
+
+          // }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

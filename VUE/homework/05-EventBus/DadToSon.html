@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/mitt/dist/mitt.umd.js"></script>
+
+  <title>组件通信</title>
+  <style>
+    .box {
+      border: 1px solid #aaa;
+      margin: 10px;
+      padding: 10px;
+    }
+
+    .desc {
+      color: #333;
+      background: #f8f8f8;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 229970615 李松蔓 -->
+  <div id="app"></div>
+  <!-- 父组件 -->
+  <template id="root">
+
+    1. 父传子：父组件通过props向子组件传递数据。<br>
+    2. 子传父：子组件通过EventBus（mitt）发送事件，父组件监听事件并接收数据。<br>
+    3. 兄弟通信：兄弟组件通过EventBus发送和监听事件，实现数据互传。<br>
+    使用mitt实现非父子组件通信，简化事件管理。
+    <div class="box">
+      <h2>父组件</h2>
+      <child-component :title="message"></child-component>
+      <brother-component></brother-component>
+      <p>收到子组件消息：{{ fromChild }}</p>
+    </div>
+  </template>
+  <!-- 子组件 -->
+  <template id="child">
+    <div class="box">
+      <h2>子组件</h2>
+      <p>收到父亲消息： {{title}}</p>
+      <button @click="sendToFather">发送消息给父组件</button><br>
+      <button @click="sendToBrother">发送消息给兄弟组件</button>
+
+    </div>
+
+  </template>
+
+  <!-- 兄弟组件 -->
+  <template id="brother">
+    <div class="box">
+      <h2>兄弟组件</h2>
+      <p>收到兄弟消息：{{ brotherMsg }}</p>
+    </div>
+  </template>
+  <script>
+    // 229970615 李松蔓
+    // 创建全局事件总线
+    const emitter = mitt();
+    const { ref, createApp } = Vue;
+    //父组件
+    const app = createApp({
+      template: "#root",
+      setup() {
+        const message = ref('hello child');
+        const fromChild = ref('');
+        // 监听子组件传来的消息
+        emitter.on('messageFromChild', (msg) => {
+          fromChild.value = msg
+        })
+        return { message, fromChild };
+      }
+    })
+    // 子组件
+    app.component('childComponent', {
+      template: "#child",
+      props: ['title'],
+      setup(props) {
+        const sendToFather = () => {
+          // 发送消息给父组件
+          emitter.emit('messageFromChild', '来自子组件的消息');
+        };
+        const sendToBrother = () => {
+          // 发送消息给兄弟组件
+          emitter.emit('messageFromBrother', '来自兄弟组件的消息');
+        };
+        return {
+          title: props.title,
+          sendToFather,
+          sendToBrother
+        };
+      }
+    })
+    // 兄弟组件
+    app.component('brotherComponent', {
+      template: "#brother",
+      setup() {
+        const brotherMsg = ref('');
+        // 监听兄弟组件消息
+        emitter.on('messageFromBrother', (msg) => {
+          brotherMsg.value = msg;
+        });
+        return { brotherMsg };
+      }
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

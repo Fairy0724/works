@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div class="ad1" ref="ad">
+      <div class="closebtn" @click="closeAd">
+        <img src="./img/cross.png" alt="">
+      </div>
+      <img src="./img/ad.png" alt="ad">
+    </div>
+
+  </template>
+  <script>
+
+    const app = Vue.createApp({
+      template: "#root",
+      methods: {
+        closeAd() {
+          this.$refs.ad.style.display = 'none';
+          // document.querySelector('.ad1').style.display = 'none';
+        }
+      }
+
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>动画过渡</title>
+  <style>
+    #message {
+      display: none;
+      font-size: 24px;
+      transform: scale(0);
+      animation: myanimation 2s linear forwards;
+    }
+
+    @keyframes myanimation {
+      0% {
+        transform: scale(0)
+      }
+
+      50% {
+        transform: scale(1.2)
+      }
+
+      100% {
+        transform: scale(1)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- 父组件 -->
+  <template id="root">
+    <div>
+      <transition>
+        <h2 v-if="show">{{message}}</h2>
+      </transition>
+      <button @click="change">切换</button>
+    </div>
+
+  </template>
+
+
+  <script>
+    const { ref, createApp } = Vue;
+    //父组件
+    const app = createApp({
+      template: "#root",
+      setup() {
+        const message = ref('动画效果');
+        const show = ref(false);
+        const change = () => {
+          show.value = !show.value;
+        };
+        return { message, show, change };
+      }
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

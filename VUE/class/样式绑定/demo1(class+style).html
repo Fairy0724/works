@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+      <!-- 原始形态 -->
+      <div class="mycolor mysize">{{message}}</div>
+      <!-- 绑定class，数组形式 -->
+      <div :class="['mycolor','mysize']">{{message}}</div>
+      <div :class="myclasses">{{message}}</div>
+      <div :class="['mycolor',flag>1?'mysize':'']">{{message}}</div>
+      <div :class="[{'mycolor':false},{'mysize':true}]">{{message}}</div>
+      <!-- 绑定class，对象形式 -->
+      <div :class="{'mycolor':age>18},{'mysize':length>180}">{{message}}</div>
+      <div :class="myclassobj">{{message}}</div>
+
+
+      <!-- 原始style -->
+      <div style="color:blue;font-size: 50px;">{{message}}</div>
+
+      <!-- 绑定class，对象形式 -->
+      <div class="{'mycolor':age>18},{'mysize':length>180}">{{message}}</div>
+      <div class="mystyleobj">{{message}}</div>
+      <!-- 绑定style，数组形式 -->
+      <div :style="{color:'blue',fontSize: '50px'}">{{message}}</div>
+      <div class="myclasses">{{message}}</div>
+      <div class="['mycolor',flag>1?'mysize':'']">{{message}}</div>
+      <div class="[{'mycolor':false},{'mysize':true}]">{{message}}</div>
+    </div>
+  </template>
+  <script>
+    const app = createApp({
+      template: '#root',
+      data() {
+        return {
+          message: 'class与style的使用',
+          myclasses: ['mycolor', 'mysize'],
+          age: 23,
+          length: 180,
+          flag: 0,
+          myclassobj: "{'mycolor':age>18},{'mysize':length>180}",
+          color: 'blue',
+          fontSize: '50px',
+          mystyleobj: {
+            // color: blue; font- size: 50px;
+        }
+      }
+    }
+    })
+  </script>
+</body>
+
+</html>

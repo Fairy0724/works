@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .gg {
+      width: 300px;
+      height: 300px;
+      text-align: center;
+      background-color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- <input type="text">
+    <button id="btn">提交</button> -->
+    <div class="gg">这是广告3秒后关闭</div>
+  </div>
+  <script>
+    // 1.定时器
+    // setInterval(执行代码,时间间隔)----执行代码中的this指向Window
+    // 每隔一段时间
+    // 关闭定时器---clearInterval
+    window.onload = function () {
+      //   const btn = document.querySelector('#btn')
+      //   btn.addEventListener('click', function () {
+      //     let cnt = 11
+      //     let timeId = setInterval(function () {
+      //       cnt--
+      //       if (cnt <= 0) {
+      //         clearInterval(timeId)
+      //       }
+      //       else {
+      //         btn.innerText = cnt
+      //       }
+      //     }, 1000)
+      //   })
+
+      // 边框设置
+      const gg = document.querySelector('.gg')
+      window.addEventListener('resize', function () {
+        if (innerWidth <= 800) {
+          gg.style.display = 'none'
+        }
+        else {
+          gg.style.display = 'block'
+
+        }
+      })
+
+      window.addEventListener('scroll', function () {
+        console.log(window.scrollTop)
+      })
+    }
+    // setTimeout(执行代码,时间)---指定时间后只执行一次
+    // setTimeout(function () {
+    //   console.log(111);//异步操作等大约2毫秒才执行
+    // }, 0)
+    // console.log(222);//同步操作--马上执行----先输出222，再输出111
+
+
+    // setTimeout(function () {
+    //   let d = document.querySelector('.gg')
+    //   d.style.display = 'none'
+    // }, 3000)
+
+
+
+    // 2.常用方法
+    // resizeBy---根据当前窗口的尺寸，按指定的宽度和高度增量调整窗口大小。
+    // resizeTo---直接将窗口调整为指定的绝对宽度和高度
+
+
+
+    // 3.navigator----包含有关访问者浏览器信息
+    //  常用userAgent----返回当前浏览器的用户代理字符串，包含浏览器类型、版本、操作系统、引擎等信息。它常用于识别客户端环境或进行浏览器兼容性判断。
+    
+
+
+    // 4.history----访问历史
+    // 5.console-----调试
+    // 6.localStorage：用于长期保存数据，除非手动删除，否则数据不会过期，并且在同一个浏览器的同源页面中可以共享数据。
+    // sessionStorage：数据仅在当前会话期间有效，当页面关闭或标签页关闭时，数据会被清除。不同的窗口或标签页之间数据不共享。
+    
+
+    
+  </script>
+</body>
+
+</html>

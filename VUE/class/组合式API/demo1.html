@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"> </div>
+  <template id="root">
+    <div>
+      <ul>
+        <li>
+          姓名：<input type="text" v-model="name">
+        </li>
+        <li>
+          奖金：<input type="text" v-model="money">
+        </li>
+      </ul>
+      <button @click="send">提交</button>
+    </div>
+  </template>
+
+  <script>
+
+
+    // app应用实例
+    const app = Vue.createApp({
+      template: "#root",
+      setup() {
+        const name = 'xy'
+        const money = 5000
+        const send = () => {
+          alert(name + "---" + money)
+        }
+        return {
+          name, money, send
+        }
+      }
+      // methods---对象方法
+
+    })
+    // root根组件实例
+    app.mount('#app')
+  </script>
+
+</body>
+
+</html>

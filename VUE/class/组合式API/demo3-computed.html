@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"> </div>
+  <template id="root">
+    <input type="text" v-model="firstname">
+    <input type="text" v-model="lastname">
+    <input type="text" v-model="fullname">
+  </template>
+
+  <script>
+
+    const { computed, ref } = Vue//解构
+    // app应用实例
+    const app = Vue.createApp({
+      template: "#root",
+      setup() {
+        const firstname = ref('xy')//响应式数据
+        const lastname = ref('xiaoyi')
+        const fullname = computed({
+          get() {
+            return firstname.value + " " + lastname.value
+          },
+          set(value) {
+            const names = value.split(' ')
+            firstname.value = names[0]
+            lastname.value = names[1]
+          }
+        })
+        return {
+          firstname,lastname,fullname
+        }
+      }
+
+      // data() {
+      //   return {
+      //     firstname: 'xy',
+      //     lastname: 'xiaoyi'
+      //   }
+      // },
+      // computed:{
+      //   fullname: {
+      //     get() {
+      //       return this.firstname + " " + this.lastname
+      //     },
+      //     set(value) {
+      //       const names = value.split(' ')
+      //       this.firstname = names[0]
+      //       this.lastname = names[1]
+      //     }
+      //   }
+      // }
+      // methods---对象方法
+
+    })
+    // root根组件实例
+    app.mount('#app')
+  </script>
+
+</body>
+
+</html>

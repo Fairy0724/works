@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+    <div>
+      {{formatDate()}}
+    </div>
+  </template>
+  <script>
+    const app = Vue.createApp({
+      // 选项式 option
+      template: '#root',
+      data: function () {
+        return {
+          today: '2025-04-24'
+        }
+      },
+      methods: {
+        formatDate() {
+          // this---组件实例
+          this.today = this.today.split('-').join('.')
+          console.log(this.today);
+
+        }
+      },
+      //生命周期函数
+      //钩子函数---1.created  2.mounted  3.beforeMount  4.beforeUpdate
+      mounted(){
+        console.log('已挂载')
+      }
+    })
+    const root = app.mount('#app')
+
+
+    
+  </script>
+</body>
+
+</html>

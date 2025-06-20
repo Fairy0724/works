@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>修饰符</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+
+    <!-- .lazy延迟更新,输入完成失去焦点或回车时更新 -->
+    <div>
+      <input type="text" v-model.lazy="message">
+      <h1>{{message}}</h1>
+    </div>
+
+    <!-- .number自动转数字,输入内容会尝试转换为数字类型 -->
+    <div>
+      <input type="text" v-model.number="score">
+      <h1>{{score}}</h1>
+    </div>
+
+    <!-- .trim自动去首尾空格 -->
+    <div>
+      <input type="text" v-model.trim="username">
+      <h1>{{username}}</h1>
+    </div>
+  </template>
+  <script>
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          message: "hello world",
+          score: '',
+          username: ''
+        }
+      }
+    }).mount("#app")
+  </script>
+</body>
+
+</html>

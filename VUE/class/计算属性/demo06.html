@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3.4.0"></script>
+
+  <title>计算属性</title>
+</head>
+
+<body>
+  <div id="app">
+  </div>
+  <template id="root">
+    <div>
+      {{title}}
+    </div>
+    <div>
+
+      <p>weight(kg):<input v-model="weight"></p>
+      <p>height(m):<input v-model="height"></p>
+      BMI:{{bmi}}
+    </div>
+  </template>
+
+  <script>
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          title: '计算属性',
+          weight: '0',
+          height: '1'
+        }
+      },
+
+      computed: {
+        bmi: {
+          get() {
+            if (this.weight === 0)
+              return 0
+
+            return (this.weight / (this.height * this.height)).toFixed(2)
+          },
+          set(value) {
+            if (this.weight === 0)
+              return 0
+            this.weight = parseFloat(value) * this.height * this.height
+          }
+        }
+
+      }
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

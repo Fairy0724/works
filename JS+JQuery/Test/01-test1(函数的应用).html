@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.调用getSum函数
+    // function getSum(num1, num2) {
+    //   var sum = num1 + num2
+    //   console.log(num1 + '+' + num2 + '=' + (num1 + num2));
+    // }
+    // getSum(2, 3)
+    // 2.getProduct函数
+
+    // var getProduct = function (num1, num2) {
+    //   console.log(num1 + '*' + num2 + '=' + (num1 * num2))
+    // }
+    // getProduct(2, 4)
+    // 3.打印a
+    // var a = 100
+    // function test() {
+    //   console.log(a)
+    //   a = 10
+    //   console.log(a)
+    // }
+    // test()
+    // console.log(a)
+
+    // 4.打印ab
+    // var a = 10
+    // fun1()
+    // function fun1() {
+    //   var b = 20
+    //   console.log(a)
+    //   console.log(b)
+    //   var a = 30
+    // }
+
+    // 5.fun2函数
+    // function fun2(a, b) {
+    //   console.log(arguments[0])
+    //   console.log(arguments[1])
+    //   console.log(arguments[2])
+    // }
+    // fun2(1, 2, 3)
+
+    // 6.
+    // function fun2(a, b) {
+    //   for (let i in arguments) {
+    //     console.log(arguments[i])
+    //   }
+    // }
+    // fun2(1, 2, 3)
+
+    // 7.
+    // "use strict"
+    // num = 100
+
+    // 8.报错的代码
+    // "use strict"
+    // function fn() {
+    //   const PI = 3.14
+    //   PI = 3
+    // }
+    // fn()
+
+    // 9.try catch
+    try {
+      "use strict"
+      function fn() {
+        const PI = 3.14
+        PI = 3
+      }
+      fn()
+    } catch (error) {
+      console.log('出错了哦')
+      console.log(`错误类型：${error.name}`)
+      console.log(`错误信息：${error.message}`)
+    }
+  </script>
+</body>
+
+</html>

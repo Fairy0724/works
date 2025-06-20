@@ -4,11 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
     <title>Document</title>
 </head>
 
 <body>
-    demo
+
 </body>
+<script>
+    Function.prototype.myCall = function (thisArg, ...args) {
+        //设置thisArg，并调用原函数
+        // this原函数 （原函数.myCall）
+        // Symbol调优，防止属性覆盖
+        const key = Symbol('key')
+        thisArg[key] = this
+        const result = thisArg[key](...args)
+        delete thisArg[key]
+        return result
+    }
+    Function.prototype.myApply = function (thisArg, args) {
+        //设置thisArg，并调用原函数
+        // this原函数 （原函数.myCall）
+        // Symbol调优，防止属性覆盖
+        const key = Symbol('key')
+        thisArg[key] = this
+        const result = thisArg[key](...args)
+        delete thisArg[key]
+        return result
+    }
+    // ...args 绑定参数
+    Function.prototype.myBind = function (thisArg, ...args) {
+        // 返回绑定的bind函数
+        return (...args1) => {
+            // 合并绑定和新传入的参数
+            return this.call(thisArg, ...args, ...args1)
+        }
+    }
+</script>
 
 </html>

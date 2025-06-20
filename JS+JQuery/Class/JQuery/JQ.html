@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.0/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <title>Document</title>
+  <style type="text/css">
+    .div1 {
+      width: 200px;
+      height: 200px;
+      border: #000 1px solid;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="t1" class="t1">
+    test1
+  </div>
+  <div id="t2" class="t2">
+    test2
+  </div>
+  <div id="test" class="div1"></div>
+  <div id="t4">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <script>
+    // window.onload=function(){}======
+    // 写法1
+    // $(document).ready(function () {
+
+    // })
+    // // 写法2 $就是jQuery
+    // $(function () {
+    //   // jQuery语法-----$(selector).action
+    //   // document.querySelector('#t1')
+    //   // $('#t1').text('abc')
+
+
+    //   const node=document.querySelector('#t1')
+
+    //   // 1.jQuery转Dom(2ways)
+    //   console.log($('#t1')[0],$('#t1').get(0));
+    //   // 2.Dom转jQuery
+    //   console.log($('node'));
+
+
+    //   // 1.基本选择器
+    //   console.log($('#t2'))
+    //   console.log($('div'))
+    //   console.log($('.t1'))
+    //   console.log($('*'))
+    //   console.log($('#t1,#t2'))
+
+    // 2.层级选择器
+    //   // 后代
+    //   console.log($('#t3 p'))
+    //    //儿子
+    //   console.log($('#t3>p'))
+    //   // 邻接
+    //   console.log($('#t2+div'))
+    //   // 兄弟
+    //   console.log($('#t2~div'))
+    // })
+
+    // 3.过滤选择器
+    // // :first 选择第一个匹配的元素
+    // console.log($('div:first'));
+    // // :last 选择最后一个匹配的元素
+    // console.log($('div:last'));
+    // // :even 选择索引为偶数的元素
+    // console.log($('div:even'));
+    // // :odd 选择索引为奇数的元素
+    // console.log($('div:odd'));
+    // // :eq(index) 选择指定索引的元素
+    // console.log($('div:eq(1)'));
+    // // :gt(index) 选择索引大于指定值的元素
+    // console.log($('div:gt(1)'));
+    // // :lt(index) 选择索引小于指定值的元素
+    // console.log($('div:lt(2)'));
+    // // :not(selector) 选择不匹配指定选择器的元素
+    // console.log($('div:not(#test)'));
+    // // :has(selector) 选择包含指定元素的元素
+    // console.log($('div:has(p)'));
+    // // :empty 选择空元素
+    // // 这里没有空元素，仅作示例
+    // console.log($('div:empty'));
+
+
+    // // 4.属性选择器
+    // // [attribute] 选择带有指定属性的元素
+    // console.log($('div[id]'));
+    // // [attribute=value] 选择属性值等于指定值的元素
+    // console.log($('div[data-custom="example"]'));
+    // // [attribute!=value] 选择属性值不等于指定值的元素
+    // console.log($('div[id!="test"]'));
+    // // [attribute^=value] 选择属性值以指定值开头的元素
+    // console.log($('div[id^="t"]'));
+    // // [attribute$=value] 选择属性值以指定值结尾的元素
+    // console.log($('div[id$="3"]'));
+    // // [attribute*=value] 选择属性值包含指定值的元素
+    // console.log($('div[class*="t"]'));
+
+    // 链式操作
+    // $(function () {
+    //   $('#test').text('jQuery').css({ "color": "red" })
+    // })
+    // $(function () {
+    //   $('#t2').text()//innerText
+    //   $('#t2').html()//innerHtml
+    //   $('#test').val()
+    // })
+
+
+
+    //文档处理
+    const element = $('<b>abc</b>')
+
+    // 内部插入
+    // 追加在里面的后面
+    // $('#t4').append(element)
+    // // 追加在里面的前面
+    // $('#t4').prepend(element)
+    // // 被动追加
+    // element.appendTo($('#t4'))
+    // element.prependTo($('#t4'))
+
+
+    // // 外部插入
+    // // 插入在t4后面
+    // $('#t4').after(element)
+    // // 插入在t4前面
+    // $('#t4').before(element)
+    // // 被动追加
+    // element.insertAfter($('#t4'))
+    // element.insertBefore($('#t4'))
+
+    const element2 = $('<b></b>')
+    // 包裹---t4被e2包裹
+    $('#t4').wrap(element2)
+    // 解除包裹---unwrap()
+    // 包裹t4里面的内容
+    $('#t4').wrapInner(element2)
+
+
+    // 替换所有
+    element2.replaceAll('div')
+    $('div').replaceWith(element2)//被动
+
+    // 移除元素及其所有子元素，事件绑定也会移除
+    $('#t4').remove()
+    // 清空元素的所有子元素，但保留元素本身
+    $('#t4').empty()
+    // 有接收返回
+    $('#t4').detach()
+
+
+
+    // JQuery事件
+    $('#name').keydown(function (event) {
+      console.log('Event type:', event.type);
+      console.log('Key code:', event.which);
+      console.log('Target element:', event.target);
+
+      // 阻止默认行为
+      if (event.which === 13) {
+        // 阻止默认行为
+        event.preventDefault();
+
+        console.log('Default behavior (form submission) prevented.');
+      }
+
+      // 阻止事件冒泡
+      event.stopPropagation();
+      
+      console.log('Event propagation stopped.');
+    });
+
+
+
+    // trigger----人为触发
+
+
+
+    // 插件
+    // pickdate----日期插件
+
+  </script>
+</body>
+
+</html>

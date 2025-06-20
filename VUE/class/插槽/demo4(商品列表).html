@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>商品列表</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- 根模板，切换场景 -->
+  <template id="root">
+    <div class="title">
+      <h1>商品列表</h1>
+    </div>
+    <product-list :list="list">
+      <template #default="{item}">
+        <li>{{item.name}}---{{item.price}}</li>
+      </template>
+
+    </product-list>
+  </template>
+
+
+  <template id="product-list">
+    <ul>
+      <slot v-for="item in list" :item="item" :key="item.name"></slot>
+    </ul>
+  </template>
+
+  <script>
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          list: [
+            { name: '冰箱', price: 2000 },
+            { name: '洗衣机', price: 3000 },
+            { name: '空调', price: 4000 }
+          ]
+        }
+      }
+    });
+    app.component("product-list",{
+      template: "#product-list",
+      props: {
+        list:{
+          type: Array,
+        }
+      }
+    })
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

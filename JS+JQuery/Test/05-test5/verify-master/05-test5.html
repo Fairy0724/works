@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>注册页面</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/verify.css">
+
+  <style>
+    /* 229970615 李松蔓 */
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 8px;
+      padding-top: 0;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    button[type="submit"] {
+      background-color: #f00;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    /* 复选框组布局（改为顶部对齐+行内显示） */
+    .form-group.checkbox-group {
+      display: flex;
+      flex-direction: row;
+      /* 水平排列 */
+      align-items: flex-start;
+      /* 关键：垂直顶部对齐（非居中） */
+      margin-top: 8px;
+      /* 上方间距 */
+      gap: 4px;
+      /* 复选框与标签间距（更紧凑） */
+    }
+
+    /* 复选框样式（顶部对齐+取消多余属性） */
+    .form-group.checkbox-group input[type="checkbox"] {
+      vertical-align: top;
+      margin-right: 0;
+      flex-shrink: 0;
+    }
+
+    .form-group.checkbox-group label {
+      display: inline;
+      /* 关键：行内元素，自然跟随复选框 */
+      vertical-align: top;
+      /* 文字顶部对齐（与复选框一致） */
+      white-space: normal;
+      /* 允许标签内容换行 */
+      /* 移除多余的flex布局属性 */
+      display: inline;
+      align-items: normal;
+    }
+
+    .error {
+      color: #ff4d4f;
+      font-size: 14px;
+      margin-top: 5px;
+      margin-left: 0;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="registerForm">
+    <!-- 用户名 -->
+    <div class="form-group">
+      <label for="username">用户名</label>
+      <input type="text" id="username" name="username" placeholder="您的用户名和登录名" required>
+    </div>
+
+    <!-- 密码 -->
+    <div class="form-group">
+      <label for="password">设置密码</label>
+      <input type="password" id="password" name="password" placeholder="建议至少使用两种字符组合" required>
+    </div>
+
+    <!-- 确认密码 -->
+    <div class="form-group">
+      <label for="confirmPassword">确认密码</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="请再次输入密码" required>
+    </div>
+
+    <!-- 手机号 -->
+    <div class="form-group">
+      <label for="phone">手机号</label>
+      <input type="tel" id="phone" name="phone" placeholder="建议使用常用手机" required>
+    </div>
+    <!-- 验证码（替换为verify插件） -->
+    <div class="form-group">
+      <label for="captcha">验证码</label>
+      <div id="captchaVerify" class="verify-code-area">
+      </div>
+    </div>
+
+    <!-- 协议勾选（左对齐调整） -->
+    <div class="form-group checkbox-group">
+      <input type="checkbox" id="agreement" name="agreement" required>
+      <label for="agreement">
+        阅读并同意
+        <a href="#">《京东用户注册协议》</a>
+        <a href="#">《隐私政策》</a>
+      </label>
+    </div>
+
+    <button type="submit" id="submit-btn">立即注册</button>
+  </form>
+
+  <!-- 引入verify插件JS（需确保路径正确） -->
+  <script src="js/verify.js"></script> <!-- 对应插件的js路径 -->
+
+  <script>
+    $(document).ready(function () {
+      // 初始化验证码插件（普通验证码，类型1）
+      $('#captchaVerify').codeVerify({
+        type: 1,
+        width: '100%', // 调整验证码宽度
+        height: '40px',
+        fontSize: '16px',
+        codeLength: 4, // 验证码长度
+        btnId: 'submit-btn', // 关联提交按钮
+        success: function () {
+          // 验证码正确时允许表单提交
+          $('#registerForm').valid(); // 触发表单验证
+        },
+        error: function () {
+          // 验证码错误时阻止提交
+          alert('验证码错误，请重新输入！');
+        }
+      });
+
+      // 表单验证配置
+      $("#registerForm").validate({
+        rules: {
+          username: { required: true },
+          password: { required: true, minlength: 8, maxlength: 20 },
+          confirmPassword: { required: true, equalTo: "#password" },
+          phone: { required: true, pattern: /^1[3-9]\d{9}$/ },
+          agreement: { required: true }
+        },
+        messages: {
+          username: { required: "用户名必填" },
+          password: {
+            required: "密码必填",
+            minlength: "密码长度至少8位",
+            maxlength: "密码长度最多20位"
+          },
+          confirmPassword: {
+            required: "确认密码必填",
+            equalTo: "确认密码与密码不一致"
+          },
+          phone: {
+            required: "手机号必填",
+            pattern: "请输入合法的11位手机号"
+          },
+          captcha: { required: "验证码必填" },
+          agreement: { required: "请勾选协议" }
+        }
+      });
+
+    });
+  </script>
+</body>
+
+</html>

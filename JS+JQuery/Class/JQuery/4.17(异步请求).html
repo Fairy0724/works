@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>异步请求</title>
+</head>
+
+<body>
+  <button id="fetchBtn">获取数据</button>
+  <script>
+    // const fetchBtn = document.querySelector('#fetchBtn')
+
+    // fetchBtn.addEventListener('click', function () {
+    //   const xhr = new XMLHttpRequest()
+    //   xhr.open('GET', 'http://jsonplaceholder.typicode.com/posts/1')
+    //   xhr.send()
+    //   xhr.onreadystatechange = function () {
+    //     if (xhr.status === 200) {
+    //       console.log(xhr.responseText)
+    //     }
+    //   }
+
+    // })
+
+    $(function () {
+      $('#fetchBtn').click(function () {
+        $.ajax({
+          type: "get",
+          url: 'http://jsonplaceholder.typicode.com/posts/1',
+          success: function (msg) {
+            console.log(msg);
+          }
+
+        })
+      })
+    })
+  </script>
+</body>
+
+</html>

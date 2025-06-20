@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>父传子</title>
+  <!-- 父组件传数据，子组件不能直接改。若改，Vue 会警告。 -->
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- 父组件用 v-bind 绑定数据，子组件用 props 接收。 -->
+  <template id="root">
+    <div>
+      <child-component :message="text" name="xy"></child-component>
+    </div>
+    
+  </template>
+
+   <template id="child">
+    <div>
+      <p>{{message}}</p>
+    </div>
+  </template>
+  <script>
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          text: 'hello child'
+        }
+      },
+
+    }
+    )
+
+    // 全局注册组件
+    app.component("childComponent",{
+      template: "#child",
+      props:['message'],
+      inheritAttrs:false,//控制非props属性是否传递给根元素
+      mounted() {
+        console.log(this.message)
+        console.log(this.$attrs.name)
+      }
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

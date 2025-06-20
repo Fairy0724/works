@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3.4.0"></script>
+
+  <title>自定义指令</title>
+</head>
+
+<body>
+  <template id="root">
+    <div>
+      {{title}}
+    </div>
+    <div>
+      <!-- :后为参数，.后是修饰符，=后是值 -->
+      <input type="text" v-focus:>
+    </div>
+  </template>
+  <div id="app">
+  </div>
+  <script>
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          title: '自定义指令'
+        }
+      },
+      //局部定义
+      directives:{
+
+      }
+    })
+
+    // 全局自定义
+    app.directive('focus',{
+      mounted(el,binding){
+        console.log(el,binding);
+      }
+
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

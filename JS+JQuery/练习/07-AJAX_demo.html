@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX 用户名检测</title>
+  <style>
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    .loading {
+      color: #666;
+    }
+
+    .exists {
+      color: #ff4444;
+    }
+
+    .available {
+      color: #00c851;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 229970615 李松蔓 -->
+  <div class="container">
+    <h2>用户名检测（输入时实时检测）</h2>
+    <div class="form-group">
+      <input type="text" id="username" placeholder="输入用户名（3-12位）">
+      <div class="status loading">输入时自动检测...</div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // 229970615 李松蔓
+    $(function () {
+      let debounceTimer;
+      $("#username").on("input", function () {
+        clearTimeout(debounceTimer); // 清除上次定时器
+        const username = $(this).val().trim();
+        const $status = $(".status");
+
+        if (username.length < 3) { // 用户名过短不检测
+          $status.text("用户名至少3位").removeClass().addClass("status");
+          return;
+        }
+
+        debounceTimer = setTimeout(function () { // 输入停止1秒后检测
+          $status.text("检测中...").removeClass().addClass("loading");
+          $.ajax({
+            url: "http://localhost:3000/check", 
+            type: "GET",
+            data: { username: username },
+            success: function (response) {
+              if (response.status === "exists") {
+                $status.text("用户名已存在！").removeClass().addClass("exists");
+              } else if (response.status === "available") {
+                $status.text("用户名可用！").removeClass().addClass("available");
+              }
+            },
+            error: function () {
+              $status.text("检测失败，请重试").removeClass().addClass("status");
+            }
+          });
+        }, 1000); 
+      });
+    });
+  </script>
+</body>
+
+</html>

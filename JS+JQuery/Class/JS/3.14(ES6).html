@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES6新特性</title>
+</head>
+
+<body>
+
+  <Script>
+    // Set不能重复
+    // const s1 = new Set([1, 2]);
+    // s1.add(3);
+    // s1.add(4);
+
+    const m = new Map([['xy', 100], ['lc', 99]]);
+
+    const s = new Set('Java');
+    m.set('qc', 100);
+    s.add('C++');
+    console.log(m);
+    console.log(s);
+    let sum = 0;
+    m.forEach(value => {
+      sum += value;
+    });
+    sum /= m.size;
+    console.log(sum);
+
+  </Script>
+</body>
+
+</html>

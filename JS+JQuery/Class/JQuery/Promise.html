@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise类</title>
+</head>
+
+<body>
+  <script>
+    // Promise异步三种状态--状态确定后不可变
+    // pending---进行中
+    // fulfilled---成功
+    // rejected---失败
+    // Promise.race----竞赛
+    // Fetch----发送AJAX
+
+
+
+    // 四个静态方法
+    // 1.all
+    // 2.race
+    // 3.resolve
+    // 4.reject
+
+
+
+    // const age = 44
+    // const p = new Promise(function (resolve, reject) {
+    //   if (age > 30) {
+    //     setTimeout(function () {
+    //       resolve('老了')
+    //     }, 3000)
+    //   } else {
+    //     reject('还能嗨')
+    //   }
+    // })
+    // p.then(function (res) {
+    //   console.log(res);
+
+    // }).catch(function (err) {
+    //   console.log(err);
+
+    // }).finally(function () {
+    //   console.log('over');
+    // })
+
+    // fetch
+    fetch('https://jsonplaceholder.typicode.com/todos/1').then(
+      response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status:${response.status}`)
+        }
+        return response.json()
+      }
+    )
+      .then(data => {
+        console.log(data);
+
+      })
+      .catch(error => {
+        console.log("Fetch error:", error);
+
+      })
+
+    // generator函数
+    // generator function
+    function* generator(i) {
+      yield i;
+      yield i + 10;
+    }
+    // gen---生成器
+    const gen = generator(10);
+    console.log(gen.next());//{value:10,done:false}
+    console.log(gen.next());//{value:20,done:false}
+    console.log(gen.next());//{value:undefined,done:true}
+
+
+    // async
+    
+  </script>
+</body>
+
+</html>

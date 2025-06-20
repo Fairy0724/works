@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>列表动画</title>
+  <style>
+    .v-enter-from,
+    .v-leave-to {
+      opacity: 0;
+    }
+
+    .v-leave-to {
+      transform: translateX(50px);
+    }
+
+    .v-move,
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 1s linear 0s;
+    }
+
+    .v-leave-active {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- 父组件 -->
+  <template id="root">
+    <div>
+      <transition-group tag="ul">
+        <li v-for="u in list" :key="u.name">
+          <span>{{u.name}} - {{u.age}}</span>
+
+        </li>
+        </transition>
+        <button @click="add">添加</button>
+        <button @click="del">删除</button>
+    </div>
+  </template>
+
+
+  <script>
+    const { ref, createApp } = Vue;
+    //父组件
+    const app = createApp({
+      template: "#root",
+      setup() {
+        const list = ref([
+          { name: 'xy', age: 23 },
+          { name: 'lc', age: 24 },
+          { name: 'songha', age: 21 },
+        ]);
+        const add = () => {
+          list.value.splice(randomIndex(), 0, { name: `xy_${randomIndex()}`, age: randomIndex() + 20 });
+        };
+        const del = () => {
+          if (list.value.length > 0) {
+            list.value.splice(randomIndex(), 1);
+          }
+        };
+        const randomIndex = () => {
+          return Math.floor(Math.random() * list.value.length);
+        };
+        return { list, add, del, randomIndex };
+      }
+    })
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

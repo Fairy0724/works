@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>组件</title>
+  <style>
+    .head {
+      display: flex;
+      padding: 10px 20px;
+    }
+
+    .head .logo img {
+      width: 100px;
+      height: auto;
+    }
+
+    .head .title {
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+
+
+  <template id="root">
+    <div>
+      <head-component></head-component>
+    </div>
+  </template>
+
+  <template id="head">
+    <div class="head">
+      <logo-component></logo-component>
+      <title-component :text="text"></title-component>
+    </div>
+  </template>
+
+  <template id="logo">
+    <div class="logo">
+      <img src="./R-C.png" alt="Logo">
+    </div>
+  </template>
+
+  <template id="title">
+    <div class="title">{{ text }}</div>
+  </template>
+
+  <script>
+    // 创建 Vue 应用
+    const app = Vue.createApp({
+      template: "#root",
+    });
+
+    app.component("logo-component", {
+      template: "#logo",
+      data() {
+        return {
+          text: "欢迎登录"
+        }
+      }
+    });
+
+    // 注册 title 组件
+    app.component("title-component", {
+      template: "#title",
+      props: {
+        text: {
+          type: String,
+          default: "欢迎注册"
+        }
+      }, // 接收动态传递的 title
+    });
+
+    // 注册 head 组件
+    app.component("head-component", {
+      template: "#head",
+      data() {
+        return {
+          text: "欢迎登录"
+        }
+      }
+    });
+
+    // 挂载应用
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

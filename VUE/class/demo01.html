@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="s in students">
+        <!-- {{}}插值表达式 -->
+        {{s.name}}--{{s.age}}
+      </li>
+    </ul>
+
+    <!-- 根组件模板1
+    <div>{{message}}</div> -->
+    <!-- 根组件模板2 -->
+    <!-- 根组件模板3 -->
+  </div>
+  <script>
+    // const app = Vue.createApp({
+    //   data() {
+    //     return {
+    //       students:[
+    //         {name:'xy',age:23},
+    //         {name:'lc',age:25},
+    //         {name:'xyz',age:23},
+    //       ]
+    //     }
+    //   },
+
+    // })
+    // const root = app.mount('#app')
+
+    // app应用实例
+    const app = Vue.createApp({
+      data() {//data---函数
+        return {
+          students:[
+            {name:'xy',age:23},
+            {name:'lc',age:25},
+            {name:'xyz',age:23},
+          ]
+        }
+      },
+        // methods---对象方法
+
+    })
+    // root根组件实例
+    const root = app.mount('#app')
+  </script>
+
+</body>
+
+</html>

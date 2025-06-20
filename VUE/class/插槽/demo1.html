@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>具名插槽</title>
+  <style>
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 8px 12px;
+      width: 340px;
+      margin: 30px auto 0 auto;
+      background: #fff;
+      box-shadow: 0 2px 8px #eee;
+    }
+    .nav-bar .center-area {
+      flex: 1;
+      text-align: center;
+    }
+    .nav-bar .search-area {
+      min-width: 40px;
+      text-align: right;
+    }
+    .nav-bar input[type="text"] {
+      width: 140px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      padding-left: 6px;
+      font-size: 15px;
+    }
+    .scene-btns {
+      width: 340px;
+      margin: 30px auto 10px auto;
+      text-align: center;
+    }
+    .scene-btns button {
+      margin: 0 10px;
+      padding: 6px 18px;
+      border-radius: 4px;
+      border: 1px solid #aaa;
+      background: #f7f7f7;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .scene-btns button:hover {
+      background: #e6e6e6;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- 根模板，切换场景 -->
+  <template id="root">
+    <div>
+      <div class="scene-btns">
+        <button @click="scene=1">场景1</button>
+        <button @click="scene=2">场景2</button>
+      </div>
+      <button @click="scene=1">场景1</button>
+      <button @click="scene=2">场景2</button>
+      <!-- 使用导航栏组件，活跃区内容通过插槽传递 -->
+      <mheader>
+
+        <!-- v-slot可以简化为# -->
+        <template v-slot:center>
+          <span v-if="scene===1" style="font-size:18px;">购物车</span>
+          <input v-else placeholder="请输入要搜索的商品"
+            style="width:140px;height:24px;border-radius:4px;border:1px solid #ccc;padding-left:6px;">
+        </template>
+        <template v-slot:search>
+          <span v-if="scene===1">&#128269;</span>
+          <button v-else
+            style="padding:2px 10px;border-radius:4px;border:1px solid #ff6700;background:#ff6700;color:#fff;">搜索</button>
+        </template>
+      </mheader>
+    </div>
+  </template>
+
+  <!-- 头部导航栏组件模板 -->
+  <template id="mheader">
+    <div class="nav-bar">
+      <span style="font-size:20px;cursor:pointer;">&#60;</span>
+      <div class="center-area">
+        <slot name="center"></slot>
+      </div>
+      <div class="search-area">
+        <slot name="search"></slot>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          scene: 1 // 1为文字，2为搜索框
+        }
+      }
+    });
+
+    // 全局注册头部导航栏组件
+    app.component("mheader", {
+      template: "#mheader"
+    });
+
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

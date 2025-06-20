@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="d0"></div>
+  <div id="d1">
+    <p>hello</p>
+  </div>
+  <div id="d2"></div>
+  <script>
+    // dom三种结点类型---------元素结点、文本结点和属性结点
+
+    console.log(document.querySelector('#d1').children);//子元素节点
+    console.log(document.querySelector('#d1').childNodes);//子节点
+    console.log(document.querySelector('#d1').parentNode);//父节点
+    console.log(document.querySelector('#d1').nextElementSibling);//后面的兄弟
+    console.log(document.querySelector('#d1').previousElementSibling);//前面的兄弟
+
+
+
+    // 删除子节点
+    document.querySelector('#d1').removeChild(document.querySelector('#p1'));
+
+    // innerHTML ：HTML 标签和文本内容
+    // innerText：获取的是元素内部的纯文本内容，会忽略 HTML 标签
+  </script>
+</body>
+
+</html>

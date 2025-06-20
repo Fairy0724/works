@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Validation Demo</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+  <style>
+    /* 229970615 李松蔓 */
+    body {
+      font-family: "微软雅黑", sans-serif;
+      margin: 50px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input {
+      padding: 8px;
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+      display: block;
+      margin-top: 5px;
+      font-weight: normal;
+    }
+
+    .success {
+      color: green;
+      display: none;
+      /* 验证通过后显示 */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 229970615 李松蔓 -->
+  <h2>用户注册表单</h2>
+  <form id="registerForm" method="post">
+    <div class="form-group">
+      <label for="username">用户名：</label>
+      <input type="text" id="username" name="username" placeholder="请输入3-12位用户名">
+    </div>
+
+    <div class="form-group">
+      <label for="email">邮箱地址：</label>
+      <input type="email" id="email" name="email" placeholder="请输入有效邮箱">
+    </div>
+
+    <div class="form-group">
+      <label for="password">密码：</label>
+      <input type="password" id="password" name="password" placeholder="至少6位，包含字母和数字">
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPass">确认密码：</label>
+      <input type="password" id="confirmPass" name="confirmPass" placeholder="请再次输入密码">
+    </div>
+
+    <button type="submit">立即注册</button>
+  </form>
+
+
+  <script>
+    // 229970615 李松蔓
+    $(function () {
+      $("#registerForm").validate({
+        rules: {
+          username: {
+            required: true,      
+            minlength: 3,        
+            maxlength: 12,        
+            alphanumeric: true     
+          },
+          email: {
+            required: true,        
+            email: true            
+          },
+          password: {
+            required: true,        
+            minlength: 6,          
+            strongPassword: true   
+          },
+          confirmPass: {
+            required: true,        
+            equalTo: "#password"    // 必须与密码字段一致
+          }
+        },
+        messages: {
+          username: {
+            required: "用户名不能为空",
+            minlength: "用户名至少3个字符",
+            maxlength: "用户名最多12个字符",
+            alphanumeric: "用户名只能包含字母和数字"
+          },
+          email: {
+            required: "邮箱不能为空",
+            email: "请输入有效的邮箱地址"
+          },
+          password: {
+            required: "密码不能为空",
+            minlength: "密码至少6位",
+            strongPassword: "密码需包含字母和数字"
+          },
+          confirmPass: {
+            required: "确认密码不能为空",
+            equalTo: "两次输入的密码不一致"
+          }
+        },
+        
+        rules: {
+          password: {
+            strongPassword: function (element) {
+              return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(element.value);
+            }
+          }
+        },
+        // 错误提示位置
+        errorPlacement: function (error, element) {
+          error.insertAfter(element).addClass("error");
+        },
+        // 验证通过处理
+        submitHandler: function (form) {
+          alert("注册信息验证通过！");
+          form.submit(); 
+        }
+      });
+
+  //  密码需包含字母和数字
+      $.validator.addMethod("strongPassword", function (value, element) {
+        return this.optional(element) || /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(value);
+      }, "密码需包含字母和数字");
+    });
+  </script>
+</body>
+
+</html>

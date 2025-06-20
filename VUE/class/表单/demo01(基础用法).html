@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <title>基本用法</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <template id="root">
+
+    <!-- 双向绑定--（v-model） -->
+    <div>
+      <!-- text -->
+      <input type="text" v-model="message">
+      <h1>{{message}}</h1>
+
+    </div>
+
+    <div>
+      <!-- textarea -->
+      <!-- 1.双向 -->
+      <textarea v-model="message"></textarea>
+      <h1>{{message}}</h1>
+    </div>
+
+
+    <div>
+      <!-- checkbox复选框 -->
+      <!-- 单个 -->
+      <input type="checkbox" v-model="checked" style="zoom:200%" />
+      <h1>{{checked}}</h1>
+
+      <!-- 多个 -->
+      <input name="A" type="checkbox" value="A" v-model="checkedOptions" style="zoom:150%">A
+      <input name="B" type="checkbox" value="B" v-model="checkedOptions" style="zoom:150%">B
+      <input name="C" type="checkbox" value="C" v-model="checkedOptions" style="zoom:150%">C
+      <h1>{{checkedOptions}}</h1>
+
+    </div>
+
+    <div>
+      <!-- radio单选按钮 -->
+      <input name="gender" type="radio" value="男" v-model="gender" style="zoom:150%">男
+      <input name="gender" type="radio" value="女" v-model="gender" style="zoom:150%">女
+      <input name="gender" type="radio" value="保密" v-model="gender" style="zoom:150%">保密
+
+    </div>
+
+
+    <div>
+      <!-- select下拉框 -->
+      <!-- 1.单选 -->
+      <!--2.多选： multiple--按住ctrl实现多选 -->
+      <select name="" id="" v-model="result" multiple>
+        <option value="" disabled>请选择</option>
+        <option value="1">是</option>
+        <option value="0">否</option>
+      </select>
+      <h1>{{result}}</h1>
+
+      <!-- 3.v-for循环 -->
+      <select v-model="selected1">
+        <option v-for="boyfriend in boyfriends" :value="boyfriend.id">
+          {{boyfriend.name}}
+        </option>
+      </select>
+      <h1>{{selected1}}</h1>
+
+    </div>
+
+  </template>
+  <script>
+    const app = Vue.createApp({
+      template: "#root",
+      data() {
+        return {
+          message: "hello world",
+          checked: true,
+          checkedOptions: [],
+          gender: '',
+          selected: '',
+          result: '',
+          boyfriends: [
+            { id: '100', name: '萧逸' },
+            { id: '101', name: '陆沉' },
+            { id: '102', name: '秦彻' },
+            { id: '103', name: '夏以昼' },
+
+          ],
+          selected1: ''
+        }
+      }
+    }).mount("#app")
+  </script>
+</body>
+
+</html>

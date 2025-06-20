@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>列表动画</title>
+  <style>
+    /* 229970615 李松蔓 */
+    .v-enter-from,
+    .v-leave-to {
+      opacity: 0;
+    }
+
+    .v-leave-to {
+      transform: translateX(50px);
+    }
+
+    .v-move,
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 1s linear 0s;
+    }
+
+    .v-leave-active {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 李松蔓 229970615 -->
+  <div id="app"></div>
+  <!-- 父组件 -->
+  <template id="root">
+    <!-- 输入框 -->
+    <input type="text">
+    <button @click.prevent="addTodo">添加</button>
+
+    <!-- 传递list和complete事件 -->
+    <doing-component :list="list" @complete="complete"></doing-component>
+    <!-- 传递doneList和del事件 -->
+    <done-component :done-list="doneList" @del="del"></done-component>
+  </template>
+
+  <!-- 待办组件 -->
+  <template id="doing">
+    <div>
+      待定列表
+      <transition-group tag="ul">
+        <li v-for="u in list" :key="u.id">
+          <span>{{u.text}}</span>
+          <button @click="complete(u.id)">完成</button>
+        </li>
+        </transition>
+    </div>
+  </template>
+
+  <!-- 已完成组件 -->
+  <template id="done">
+    <div>
+      已完成列表
+      <transition-group tag="ul">
+        <li v-for="u in doneList" :key="u.id">
+          <span>{{u.text}}</span>
+          <button @click="del(u.id)">删除</button>
+        </li>
+        </transition>
+    </div>
+  </template>
+
+
+  <script>
+    // 229970615 李松蔓
+    const { ref, createApp } = Vue;
+    // 待办组件
+    const doingComponent = {
+      template: "#doing",
+      props: {
+        list: {
+          type: Array,
+          required: true
+        }
+      },
+      emits: ['complete'],
+      setup(props, { emit }) {
+        // 通知父组件完成某项
+        const complete = (id) => {
+          emit('complete', id);
+        };
+        return { complete };
+      }
+    }
+
+    // 已完成组件
+    const doneComponent = {
+      template: "#done",
+      props: {
+        doneList: {
+          type: Array,
+          required: true
+        }
+      },
+      // 监听父组件的del事件
+      emits: ['del'],
+      setup(props, { emit }) {
+        // 通知父组件删除某项
+        const del = (id) => {
+          // 触发父组件的del事件
+          emit('del', id);
+        };
+        return { del };
+      }
+    }
+    //父组件
+    const app = createApp({
+      template: "#root",
+      components: {
+        'doing-component': doingComponent,
+        'done-component': doneComponent
+      },
+      setup() {
+        const list = ref([]);
+        const doneList = ref([]);
+        // 添加待办事项
+        const addTodo = () => {
+          // 获取输入框的值
+          const text = document.querySelector("input").value;
+          if (text) {
+            list.value.push({ id: Date.now(), text });
+            // 清空输入框
+            document.querySelector("input").value = '';
+          }
+        };
+        // 完成
+        const complete = (id) => {
+          // 找到待办事项
+          const index = list.value.findIndex(item => item.id === id);
+          // 如果找到，移动到已完成列表
+          if (index > -1) {
+            doneList.value.push(list.value[index]);
+            // 从待办列表中删除
+            list.value.splice(index, 1);
+          }
+        };
+        // 删除
+        const del = (id) => {
+          doneList.value = doneList.value.filter(item => item.id !== id);
+        };
+        return { list, doneList, addTodo, complete, del };
+      }
+    })
+
+    app.mount("#app")
+  </script>
+</body>
+
+</html>

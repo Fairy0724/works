@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3.4.0"></script>
+
+  <title>计算属性</title>
+</head>
+
+<body>  
+  <div id="app">
+    <div id="app">
+  </div>
+  <template id="root">
+    <div>
+      {{title}}
+    </div>
+    <div>
+      {{message.split("").reverse().join("")}}
+    </div>
+    <div>
+      {{revCWord}}
+    </div>
+  </template>
+
+  <script>
+    const app = Vue.createApp({
+      template: '#root',
+      data() {
+        return {
+          title: '计算属性',
+          message:'hello'
+        }
+      },
+      methods: {
+        revWord(str) {
+
+          return str.split("").reverse().join("")
+        }
+      },
+      // 计算属性---不能传参
+      computed:{
+        revCWord(){
+          return this.message.split("").reverse().join("")
+        }
+      }
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
