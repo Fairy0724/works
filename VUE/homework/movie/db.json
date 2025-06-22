@@ -1,0 +1,549 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "xy",
+      "password": "123456",
+      "favorites": [
+        1,
+        2,
+        15
+      ],
+      "phone": "13800138000",
+      "avatar": "https://tse3-mm.cn.bing.net/th/id/OIP-C.iwMd5xkcMHgzEa19e0kJywHaHa?w=195&h=196&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "email": ""
+    },
+    {
+      "id": "b7d2",
+      "username": "Rami",
+      "password": "123456",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9IiNFNUU3RUIiLz4KPGNpcmNsZSBjeD0iNjAiIGN5PSI0NSIgcj0iMjAiIGZpbGw9IiM5Q0EzQUYiLz4KPHBhdGggZD0iTTIwIDEwNUMyMCA5NS4wNTc2IDI4LjA1NzYgODcgMzggODdIODJDNzEuOTQyNCA4NyA2NCA5NS4wNTc2IDY0IDEwNUw2NCAxMTBIMjBWMTA1WiIgZmlsbD0iIzlDQTNBRiIvPgo8L3N2Zz4K",
+      "favorites": []
+    }
+  ],
+  "movies": [
+    {
+      "id": "1",
+      "title": "阿凡达",
+      "desc": "外星球探险，视觉盛宴。",
+      "poster": "https://tse1-mm.cn.bing.net/th/id/OIP-C.CygIVpVIAG81EJTjth_L_wHaLm?w=186&h=291&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "score": 9.2,
+      "type": [
+        "科幻",
+        "冒险",
+        "环保"
+      ],
+      "countryRegion": "美国",
+      "year": 2023,
+      "director": "詹姆斯·卡梅隆",
+      "actors": "萨姆·沃辛顿, 佐伊·索尔达娜",
+      "detail": "《阿凡达》讲述了人类在潘多拉星球与纳美人之间的冲突与和解，影片以其震撼的视觉特效和深刻的环保主题著称。"
+    },
+    {
+      "id": "2",
+      "title": "哪吒之魔童降世",
+      "desc": "哪吒逆天改命，国漫崛起。",
+      "poster": "https://tse3-mm.cn.bing.net/th/id/OIP-C.TpwR74hNVN4MfNgnbQJpDwHaK8?rs=1&pid=ImgDetMain",
+      "score": 9.2,
+      "type": [
+        "动画",
+        "神话",
+        "奇幻"
+      ],
+      "countryRegion": "中国",
+      "year": 2019,
+      "director": "饺子",
+      "actors": "吕艳婷, 囧森瑟夫",
+      "detail": "哪吒出生时被视为魔丸转世，却凭借自己的努力逆天改命，成为拯救苍生的英雄。"
+    },
+    {
+      "id": "3",
+      "title": "你好，李焕英",
+      "desc": "穿越时空的母女情深。",
+      "poster": "https://ts1.tc.mm.bing.net/th/id/OIP-C.8lX1jAIyGfMZ2tv_rHBiBAHaKk?w=209&h=298&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.3,
+      "type": [
+        "喜剧",
+        "剧情",
+        "家庭"
+      ],
+      "countryRegion": "中国",
+      "year": 2021,
+      "director": "贾玲",
+      "actors": "贾玲, 张小斐",
+      "detail": "贾晓玲意外穿越回到1981年，与年轻时的母亲成为朋友，重新体会母女深情。"
+    },
+    {
+      "id": "4",
+      "title": "美女与野兽",
+      "desc": "经典童话真人版。",
+      "poster": "https://ts4.tc.mm.bing.net/th/id/OIP-C.SGGyGLeIg-RDDGhp8o-NlQDNEw?w=205&h=304&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.5,
+      "type": [
+        "爱情",
+        "奇幻",
+        "童话"
+      ],
+      "countryRegion": "美国",
+      "year": 2017,
+      "director": "比尔·康顿",
+      "actors": "艾玛·沃森, 丹·史蒂文斯",
+      "detail": "贝儿用爱心和勇气打破了野兽的魔咒，展现了真爱无敌的主题。"
+    },
+    {
+      "id": "6",
+      "title": "太极之异兽冢",
+      "desc": "奇幻武侠新篇章。",
+      "poster": "https://ts3.tc.mm.bing.net/th/id/OIP-C.29QD806WgxkL4ssa_g_dLAHaOB?w=181&h=344&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 7.3,
+      "type": [
+        "奇幻",
+        "武侠",
+        "动作"
+      ],
+      "countryRegion": "中国",
+      "year": 2023,
+      "director": "杨秉佳",
+      "actors": "张艺骞, 刘冠成",
+      "detail": "太极门弟子探秘异兽冢，展开一场奇幻冒险。"
+    },
+    {
+      "id": "7",
+      "title": "流浪地球2",
+      "desc": "人类文明的星际逃亡与科技救赎。",
+      "poster": "https://ts1.tc.mm.bing.net/th/id/OIP-C.SQOgClQRwdpVLkBhFWpK7AHaKb?w=210&h=296&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.3,
+      "type": [
+        "科幻",
+        "灾难"
+      ],
+      "countryRegion": "中国",
+      "year": 2023,
+      "director": "郭帆",
+      "actors": "吴京, 刘德华, 李雪健",
+      "detail": "太阳危机前夕，人类启动“移山计划”为地球寻找新家园，影片融合硬核科幻设定与家庭情感内核，展现集体主义下的文明抉择。"
+    },
+    {
+      "id": "8",
+      "title": "寄生虫",
+      "desc": "阶级鸿沟下的黑色寓言。",
+      "poster": "https://ts1.tc.mm.bing.net/th/id/OIP-C.Xo8fQNJW51wH3J7STPsh3QHaKj?w=209&h=298&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.8,
+      "type": [
+        "剧情",
+        "悬疑",
+        "社会"
+      ],
+      "countryRegion": "韩国",
+      "year": 2019,
+      "director": "奉俊昊",
+      "actors": "宋康昊, 李善均, 赵汝贞",
+      "detail": "贫困家庭以“寄生”方式渗入富裕家庭生活，通过黑色幽默与惊悚反转，揭示现代社会难以逾越的阶层壁垒，获奥斯卡最佳影片。"
+    },
+    {
+      "id": "9",
+      "title": "蜘蛛侠：纵横宇宙",
+      "desc": "多元宇宙的视觉狂欢与成长命题。",
+      "poster": "https://ts3.tc.mm.bing.net/th/id/OIP-C.i6_WgI6dXPR-PSQ_AoZFcgHaK-?w=205&h=304&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.5,
+      "type": [
+        "动画",
+        "超级英雄",
+        "冒险"
+      ],
+      "countryRegion": "美国",
+      "year": 2023,
+      "director": "乔伊姆·多斯·桑托斯, 凯普·鲍尔斯",
+      "actors": "沙梅克·摩尔, 奥斯卡·伊萨克, 海莉·斯坦菲尔德",
+      "detail": "迈尔斯·莫拉莱斯穿越多元宇宙，与不同维度的蜘蛛侠并肩作战，对抗威胁所有宇宙的危机，以突破性动画美学重构超级英雄叙事。"
+    },
+    {
+      "id": "10",
+      "title": "消失的她",
+      "desc": "悬疑爱情下的人性深渊。",
+      "poster": "https://ts2.tc.mm.bing.net/th/id/OIP-C.VByj8DxHH8AATp6nQnRbYAHaKg?w=209&h=297&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 6.3,
+      "type": [
+        "悬疑",
+        "犯罪",
+        "爱情"
+      ],
+      "countryRegion": "中国",
+      "year": 2023,
+      "director": "崔睿, 刘翔",
+      "actors": "朱一龙, 倪妮, 文咏珊",
+      "detail": "何非的妻子李木子在东南亚旅行中离奇失踪，当神秘女子以“妻子”身份出现时，一场关乎真相与欲望的博弈逐渐失控，改编自苏联电影《为单身汉设下的陷阱》。"
+    },
+    {
+      "id": "11",
+      "title": "奥本海默",
+      "desc": "原子弹之父的命运与道德困境。",
+      "poster": "https://ts4.tc.mm.bing.net/th/id/OIP-C.eZIzzNuOM-VkctlPhYzjLAHaK-?w=205&h=304&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.8,
+      "type": [
+        "传记",
+        "历史",
+        "惊悚"
+      ],
+      "countryRegion": "美国",
+      "year": 2023,
+      "director": "克里斯托弗·诺兰",
+      "actors": "基里安·墨菲, 艾米莉·布朗特, 小罗伯特·唐尼",
+      "detail": "聚焦“曼哈顿计划”核心人物奥本海默，以非线性叙事呈现他在创造原子弹过程中的科学理想与人性挣扎，诺兰用IMAX胶片拍摄还原历史震撼力。"
+    },
+    {
+      "id": "12",
+      "title": "长安三万里",
+      "desc": "诗史交织的大唐盛世长卷。",
+      "poster": "https://ts2.tc.mm.bing.net/th/id/OIP-C.Qj32edar75_Gp9BDcA8s_wHaL0?w=197&h=315&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.1,
+      "type": [
+        "动画",
+        "历史",
+        "传记"
+      ],
+      "countryRegion": "中国",
+      "year": 2023,
+      "director": "谢君伟, 邹靖",
+      "actors": "杨天翔, 凌振赫, 吴俊全",
+      "detail": "以高适视角回顾与李白的一生情谊，串联起盛唐诗人的命运沉浮，通过48首唐诗与壮阔山水动画，再现“一日看尽长安花”的文化盛景，票房突破17亿创国产动画新高。"
+    },
+    {
+      "id": "13",
+      "title": "好东西",
+      "desc": "90后导演邵艺辉的都市情感寓言，以犀利台词解构亲密关系中的权力博弈。",
+      "poster": "https://ts1.tc.mm.bing.net/th/id/OIP-C.SDCjppnXzo8_d8YOi5gMVwHaLH?w=204&h=306&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.9,
+      "type": [
+        "剧情",
+        "爱情"
+      ],
+      "countryRegion": "中国",
+      "year": 2024,
+      "director": "邵艺辉",
+      "actors": "宋佳, 钟楚曦, 曾慕梅",
+      "detail": "讲述了单亲妈妈王铁梅带小孩王茉莉搬到新家后，结识了邻居小叶，两位性格迥异的女性，一个坚强，一个柔软，一个擅长给人当妈，一个擅长随时撒谎，面对旧创伤和新挑战，她们彼此温暖互相慰藉的故事 。"
+    },
+    {
+      "id": "14",
+      "title": "哪吒之魔童闹海",
+      "desc": "饺子导演时隔六年的国漫续作。",
+      "poster": "https://ts2.tc.mm.bing.net/th/id/OIP-C.1QdfphgRB7S4wTD4rjIubgHaKX?w=211&h=295&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.7,
+      "type": [
+        "动画",
+        "神话",
+        "动作"
+      ],
+      "countryRegion": "中国",
+      "year": 2025,
+      "director": "饺子",
+      "actors": "吕艳婷, 囧森瑟夫, 瀚墨",
+      "detail": "讲述了天劫之后，哪吒、敖丙的灵魂保住了，但很快会魂飞魄散，太乙真人打算用七色宝莲给二人重塑肉身，但是在重塑肉身的过程中却遇到重重困难，哪吒、敖丙的命运将迎来更多的挑战。"
+    },
+    {
+      "id": "15",
+      "title": "史迪奇大电影：星际救援",
+      "desc": "迪士尼经典IP重启之作，外星萌宠史迪奇穿越星际寻找失落的家族。",
+      "poster": "https://ts4.tc.mm.bing.net/th/id/OIP-C.VSFyxxpIX3xM4yIa6iVQHQHaKl?w=209&h=298&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 7.9,
+      "type": [
+        "动画",
+        "冒险",
+        "喜剧"
+      ],
+      "countryRegion": "美国",
+      "year": 2025,
+      "director": "克里斯·桑德斯",
+      "actors": "克里斯·桑德斯, 蒂亚·卡雷尔",
+      "detail": "史迪奇与莉萝发现星际联盟隐藏的“实验体墓地”，为拯救被遗弃的实验体，他们驾驶破飞船穿越黑洞，途中遭遇星际海盗追击，延续“家人是彼此选择”的核心主题。"
+    },
+    {
+      "id": "16",
+      "title": "肖生克的救赎",
+      "desc": "影史评分天花板，用二十年光阴诠释自由与希望的真谛。",
+      "poster": "https://ts3.tc.mm.bing.net/th/id/OIP-C.yYI7poZflp3hcYDdV03CtwHaLD?w=204&h=305&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.7,
+      "type": [
+        "剧情",
+        "犯罪",
+        "励志"
+      ],
+      "countryRegion": "美国",
+      "year": 1994,
+      "director": "弗兰克·德拉邦特",
+      "actors": "蒂姆·罗宾斯, 摩根·弗里曼",
+      "detail": "银行家安迪含冤入狱，在肖生克监狱用智慧与毅力度过二十年，最终通过下水道重获自由。影片改编自斯蒂芬·金小说，被影迷称为“人生必看电影”，IMDb Top 250稳居榜首。"
+    },
+    {
+      "id": "17",
+      "title": "绿皮书",
+      "desc": "跨越种族与阶级的公路温情片，获奥斯卡最佳影片。",
+      "poster": "https://ts1.tc.mm.bing.net/th/id/OIP-C.h4bWbyoPDLSWt6p1hsjFdQAAAA?w=187&h=332&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.9,
+      "type": [
+        "剧情",
+        "喜剧",
+        "传记"
+      ],
+      "countryRegion": "美国",
+      "year": 2018,
+      "director": "彼得·法拉利",
+      "actors": "维果·莫腾森, 马赫沙拉·阿里",
+      "detail": "意大利保镖托尼为黑人钢琴家唐开车南下巡演，途中遭遇种族歧视，两人从互相猜忌到彼此理解。影片根据真实事件改编，用幽默化解沉重，展现人性中的善良底色。"
+    },
+    {
+      "id": "18",
+      "title": "阿甘正传",
+      "desc": "傻子的视角见证美国近代史，奥斯卡最佳影片得主。",
+      "poster": "https://ts1.tc.mm.bing.net/th/id/OIP-C.wc9GdG8Tz5b56XTj_ZRkUQHaLH?w=204&h=306&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.5,
+      "type": [
+        "剧情",
+        "励志",
+        "传记"
+      ],
+      "countryRegion": "美国",
+      "year": 1994,
+      "director": "罗伯特·泽米吉斯",
+      "actors": "汤姆·汉克斯, 罗宾·怀特",
+      "detail": "智商低于常人的阿甘用纯粹的内心拥抱人生，意外成为越战英雄、乒乓球外交使者与百万富翁。影片通过“羽毛”意象隐喻命运，经典台词“生活就像巧克力”风靡全球。"
+    },
+    {
+      "id": "19",
+      "title": "楚门的世界",
+      "desc": "当人生成为全球直播，一场逃离虚假世界的觉醒之旅。",
+      "poster": "https://ts4.tc.mm.bing.net/th/id/OIP-C.DrrPiszVZZy2Yb-LG8xLqgHaKa?w=210&h=296&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.4,
+      "type": [
+        "剧情",
+        "科幻",
+        "悬疑"
+      ],
+      "countryRegion": "美国",
+      "year": 1998,
+      "director": "彼得·威尔",
+      "actors": "金·凯瑞, 劳拉·琳妮",
+      "detail": "楚门从小到大生活在巨型摄影棚中，他的人生是24小时直播的肥皂剧。当发现世界的破绽后，他用勇气打破导演设定的“完美人生”，引发对隐私与自由的深刻思考。"
+    },
+    {
+      "id": "20",
+      "title": "泰坦尼克号",
+      "desc": "世纪海难中的爱情绝唱，詹姆斯·卡梅隆的票房神话。",
+      "poster": "https://ts3.tc.mm.bing.net/th/id/OIP-C.idY7JyVaig4QlcO_5RVYKwHaKm?w=208&h=299&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.4,
+      "type": [
+        "爱情",
+        "灾难",
+        "历史"
+      ],
+      "countryRegion": "美国",
+      "year": 1997,
+      "director": "詹姆斯·卡梅隆",
+      "actors": "莱昂纳多·迪卡普里奥, 凯特·温斯莱特",
+      "detail": "穷画家杰克与贵族女露丝在泰坦尼克号上相爱，沉船灾难中杰克牺牲自己拯救露丝。影片耗资2亿美元打造，获11项奥斯卡奖，“我心永恒”主题曲与冰山镜头成影史经典。"
+    },
+    {
+      "id": "21",
+      "title": "当幸福来敲门",
+      "desc": "威尔·史密斯父子演绎真实励志故事，诠释绝境中的父爱与坚持。",
+      "poster": "https://ts3.tc.mm.bing.net/th/id/OIP-C.IgFOlkhWf_62uO8J72bTGAHaLH?w=204&h=306&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.2,
+      "type": [
+        "剧情",
+        "励志",
+        "家庭"
+      ],
+      "countryRegion": "美国",
+      "year": 2006,
+      "director": "加布里埃莱·穆奇诺",
+      "actors": "威尔·史密斯, 贾登·史密斯",
+      "detail": "濒临破产的推销员克里斯带着儿子睡地铁站厕所、排队领救济餐，却从未放弃成为股票经纪人的梦想。影片根据真实人物改编，结尾父子击掌镜头催泪无数。"
+    },
+    {
+      "id": "22",
+      "title": "寻梦环游记",
+      "desc": "皮克斯用亡灵世界诠释亲情羁绊，获奥斯卡最佳动画长片。",
+      "poster": "https://ts4.tc.mm.bing.net/th/id/OIP-C.TXIW2bBQgEbnR-YF5qRt2QHaKW?w=211&h=295&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.1,
+      "type": [
+        "动画",
+        "奇幻",
+        "音乐"
+      ],
+      "countryRegion": "美国",
+      "year": 2017,
+      "director": "李·昂克里奇, 阿德里安·莫利纳",
+      "actors": "安东尼·冈萨雷斯, 盖尔·加西亚·贝纳尔",
+      "detail": "墨西哥男孩米格为追寻音乐梦想闯入亡灵世界，在已故亲人的帮助下解开家族秘密。影片用绚丽的色彩描绘亡灵节，主题曲《请记住我》既温暖又催泪，传递“记忆是爱的延续”。"
+    },
+    {
+      "id": "23",
+      "title": "疯狂动物城",
+      "desc": "迪士尼构建的动物乌托邦，用兔子警官的冒险探讨偏见与包容。",
+      "poster": "https://ts4.tc.mm.bing.net/th/id/OIP-C.XZCIWwtmLWwG0OLrKgyXewHaL2?w=197&h=316&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.2,
+      "type": [
+        "动画",
+        "冒险",
+        "悬疑"
+      ],
+      "countryRegion": "美国",
+      "year": 2016,
+      "director": "拜伦·霍华德, 瑞奇·摩尔",
+      "actors": "金妮弗·古德温, 杰森·贝特曼",
+      "detail": "乐观的兔子朱迪成为动物城首位兔子警官，与狐狸尼克联手侦破“食肉动物失踪案”，揭开偏见背后的阴谋。影片彩蛋密集，树懒闪电的“闪电式”办事效率成全网笑点。"
+    },
+    {
+      "id": "24",
+      "title": "情书",
+      "desc": "岩井俊二执导的日式纯爱经典，雪国场景下的暗恋与追忆。",
+      "poster": "https://ts2.tc.mm.bing.net/th/id/OIP-C.z66t6M5h8fzfvDDYYkdO2AHaKj?w=209&h=298&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.9,
+      "type": [
+        "爱情",
+        "剧情",
+        "悬疑"
+      ],
+      "countryRegion": "日本",
+      "year": 1995,
+      "director": "岩井俊二",
+      "actors": "中山美穗, 柏原崇, 酒井美纪",
+      "detail": "博子因思念亡夫藤井树，意外发现他高中时的暗恋故事。影片通过一封寄往“藤井树”的信，在雪落无声的小樽市展开双线叙事，柏原崇在图书馆窗边看书的镜头成“白月光”象征。"
+    },
+    {
+      "id": "25",
+      "title": "这个杀手不太冷",
+      "desc": "大叔与萝莉的反差萌组合，吕克·贝松的暴力美学代表作。",
+      "poster": "https://ts2.tc.mm.bing.net/th/id/OIP-C.S2x78dDlkUjOGp-lDctV8AAAAA?w=204&h=305&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.4,
+      "type": [
+        "动作",
+        "犯罪",
+        "爱情"
+      ],
+      "countryRegion": "法国",
+      "year": 1994,
+      "director": "吕克·贝松",
+      "actors": "让·雷诺, 娜塔莉·波特曼, 加里·奥德曼",
+      "detail": "职业杀手莱昂收留了被灭门的女孩玛蒂尔达，两人在枪林弹雨中产生微妙情愫。加里·奥德曼饰演的变态警察斯坦斯菲尔德成经典反派，“人生总是这么苦吗？”“总是如此”的对话直击人心。"
+    },
+    {
+      "id": "26",
+      "title": "盗梦空间",
+      "desc": "诺兰打造的梦境迷宫，烧脑剧情与视觉奇观的巅峰之作。",
+      "poster": "https://ts4.tc.mm.bing.net/th/id/OIP-C.hPK44Dage01DKdRTY1Sm-gHaK9?w=205&h=304&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.4,
+      "type": [
+        "科幻",
+        "悬疑",
+        "动作"
+      ],
+      "countryRegion": "美国",
+      "year": 2010,
+      "director": "克里斯托弗·诺兰",
+      "actors": "莱昂纳多·迪卡普里奥, 约瑟夫·高登－莱维特",
+      "detail": "盗梦师柯布通过潜入梦境窃取商业机密，为赎罪接受“植入想法”的反向任务。影片多层梦境嵌套的设定挑战观众逻辑，旋转的陀螺成为开放结局的象征，IMAX拍摄的“折叠城市”场景震撼影史。"
+    },
+    {
+      "id": "27",
+      "title": "放牛班的春天",
+      "desc": "音乐老师用合唱拯救问题少年，法国温情教育片的典范。",
+      "poster": "https://ts2.tc.mm.bing.net/th/id/OIP-C.KZpXd4bWNiL0gBeAhjYxcwAAAA?w=190&h=266&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9.3,
+      "type": [
+        "剧情",
+        "音乐",
+        "教育"
+      ],
+      "countryRegion": "法国",
+      "year": 2004,
+      "director": "克里斯托夫·巴拉蒂",
+      "actors": "热拉尔·朱尼奥, 让－巴蒂斯特·莫尼耶",
+      "detail": "失意音乐家马修来到管教森严的寄宿学校，用合唱队唤醒孩子们的天性，其中皮埃尔的天籁之音尤为突出。影片没有激烈冲突，却用温柔的力量展现教育的真谛，《风筝》等合唱曲目治愈人心。"
+    },
+    {
+      "id": "28",
+      "title": "我不是药神",
+      "desc": "徐峥主演的现实题材力作，直击天价药背后的民生痛点。",
+      "poster": "https://ts3.tc.mm.bing.net/th/id/OIP-C.enXS7WPANwh9FLdKC7Zk-gHaKY?w=211&h=296&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 9,
+      "type": [
+        "剧情",
+        "社会",
+        "现实"
+      ],
+      "countryRegion": "中国",
+      "year": 2018,
+      "director": "文牧野",
+      "actors": "徐峥, 王传君, 章宇",
+      "detail": "保健品商贩程勇从走私低价抗癌药牟利，到成为白血病患者心中的“药神”，影片改编自真实事件“陆勇案”，引发对医疗公平的全民讨论，获金马奖最佳剧情片，票房突破31亿。"
+    },
+    {
+      "id": "29",
+      "title": "沉默的羔羊",
+      "desc": "影史最经典的心理惊悚片，汉尼拔博士成教科书级反派。",
+      "poster": "https://ts1.tc.mm.bing.net/th/id/OIP-C.ZJ0Zt1Xdvzqh7XJh7c2KlAHaK9?w=205&h=304&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 8.9,
+      "type": [
+        "惊悚",
+        "犯罪",
+        "悬疑"
+      ],
+      "countryRegion": "美国",
+      "year": 1991,
+      "director": "乔纳森·戴米",
+      "actors": "朱迪·福斯特, 安东尼·霍普金斯",
+      "detail": "实习特工克拉丽斯为追捕连环杀手“野牛比尔”，向监狱中的食人魔汉尼拔求助。霍普金斯仅16分钟戏份却获奥斯卡影帝，“Silence of the Lambs”的台词与面具造型成恐怖电影标杆，影片包揽奥斯卡五项大奖。"
+    },
+    {
+      "id": "30",
+      "title": "异形：夺命舰",
+      "desc": "雷德利·斯科特监制的科幻恐怖片，异形生物再掀太空屠杀。",
+      "poster": "https://ts4.tc.mm.bing.net/th/id/OIP-C.DxUQCmHQU1-ZUv21sBArxwHaJQ?w=223&h=279&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 7.6,
+      "type": [
+        "科幻",
+        "恐怖",
+        "惊悚"
+      ],
+      "countryRegion": "美国",
+      "year": 2024,
+      "director": "费德·阿尔瓦雷兹",
+      "actors": "凯莉·斯派妮, 大卫·琼森, 伊莎贝拉·默塞德",
+      "detail": "商业飞船“普罗米修斯号”在深空探测时意外唤醒异形胚胎，船员被寄生后变异为恐怖生物。影片回归《异形》系列的幽闭恐怖风格，新增“酸性血液腐蚀飞船”的硬核设定，伊莎贝拉·默塞德饰演的生化人角色为剧情埋下伏笔。"
+    },
+    {
+      "id": "31",
+      "title": "某种物质",
+      "desc": "该片讲述了一名过气好莱坞明星陷入生涯低谷，惨遭解雇，从不轻易放弃的她选择了一种名为“实体”的革命性医疗服务来重拾自己的故事 。",
+      "poster": "https://ts2.tc.mm.bing.net/th/id/OIP-C.8wupZ8S__sTL3VLQXbWQQAHaK1?w=206&h=302&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 7.8,
+      "type": [
+        "恐怖"
+      ],
+      "countryRegion": "法国",
+      "year": 2024,
+      "director": "科拉莉·法尔雅",
+      "actors": "黛米·摩尔、玛格丽特·库里",
+      "detail": "已至中年的减肥节目主持人伊丽莎白（黛米·摩尔 饰）为了不被开除，通过注射“某种物质”来克隆出一个更年轻、完美的复制体苏（玛格丽特·库里 饰）来代替自己主持。她们七天轮换一次，共享着人生。而随着伊丽莎白自我厌恶程度的加深，平衡被打破，原身和复制体之间展开了一场血腥的大逃杀 。"
+    },
+    {
+      "id": "33",
+      "title": "热辣滚烫",
+      "desc": "贾玲自导自演的喜剧新作，减肥训练营里的逆袭故事。",
+      "poster": "https://ts1.tc.mm.bing.net/th/id/OIP-C.CSm2Ub07BxElceynjSWDDQHaKX?w=211&h=295&c=8&rs=1&qlt=70&o=7&cb=iavawebp1&dpr=1.3&pid=3.1&rm=3",
+      "score": 7.2,
+      "type": [
+        "喜剧",
+        "励志",
+        "剧情"
+      ],
+      "countryRegion": "中国",
+      "year": 2024,
+      "director": "贾玲",
+      "actors": "贾玲, 雷佳音, 张小斐, 马丽",
+      "detail": "贪吃女孩李滚烫为追爱加入魔鬼减肥营，与退役运动员教练（雷佳音 饰）展开斗智斗勇。马丽特别出演减肥营老板娘，影片延续《你好，李焕英》的温情喜剧风格，广场舞减肥段落致敬80年代迪斯科文化。"
+    }
+  ]
+}
